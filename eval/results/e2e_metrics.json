@@ -1,0 +1,526 @@
+{
+  "dataset": "AuditLens AI end-to-end synthetic evaluation",
+  "case_count": 12,
+  "scoring_unit": "line_id + rule pair",
+  "mode": "FastAPI upload endpoint with deterministic mock verifier plus rule guardrails",
+  "generated_cases_dir": "eval/generated_cases",
+  "reports_dir": "eval/results/reports",
+  "aggregate_metrics": {
+    "true_positive": 22,
+    "false_positive": 0,
+    "false_negative": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "cases": [
+    {
+      "case_id": "CLM-EVAL-001",
+      "title": "Original planted mixed-error claim",
+      "bill_format": "json",
+      "record_format": "txt",
+      "bill_path": "eval/generated_cases/CLM-EVAL-001/CLM-EVAL-001_bill.json",
+      "record_path": "eval/generated_cases/CLM-EVAL-001/CLM-EVAL-001_record.txt",
+      "report_path": "eval/results/reports/CLM-EVAL-001_report.json",
+      "expected_flags": [
+        {
+          "line_id": "L1",
+          "rule": "UPCODE"
+        },
+        {
+          "line_id": "L4",
+          "rule": "NCCI_BUNDLE"
+        },
+        {
+          "line_id": "L4",
+          "rule": "UNSUPPORTED"
+        },
+        {
+          "line_id": "L5",
+          "rule": "MUE_UNITS"
+        },
+        {
+          "line_id": "L6",
+          "rule": "DUPLICATE"
+        },
+        {
+          "line_id": "L7",
+          "rule": "MEDICAL_NECESSITY"
+        },
+        {
+          "line_id": "L7",
+          "rule": "NO_DOCUMENTATION"
+        },
+        {
+          "line_id": "L8",
+          "rule": "MEDICAL_NECESSITY"
+        }
+      ],
+      "predicted_flags": [
+        {
+          "line_id": "L1",
+          "rule": "UPCODE"
+        },
+        {
+          "line_id": "L4",
+          "rule": "NCCI_BUNDLE"
+        },
+        {
+          "line_id": "L4",
+          "rule": "UNSUPPORTED"
+        },
+        {
+          "line_id": "L5",
+          "rule": "MUE_UNITS"
+        },
+        {
+          "line_id": "L6",
+          "rule": "DUPLICATE"
+        },
+        {
+          "line_id": "L7",
+          "rule": "MEDICAL_NECESSITY"
+        },
+        {
+          "line_id": "L7",
+          "rule": "NO_DOCUMENTATION"
+        },
+        {
+          "line_id": "L8",
+          "rule": "MEDICAL_NECESSITY"
+        }
+      ],
+      "missing_flags": [],
+      "extra_flags": [],
+      "metrics": {
+        "true_positive": 8,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "risk_score": 100,
+      "dollars_at_risk": 2020.0,
+      "ai_trace_count": 8,
+      "record_input_type": "text",
+      "ocr_used": false
+    },
+    {
+      "case_id": "CLM-EVAL-002",
+      "title": "Clean supported claim",
+      "bill_format": "csv",
+      "record_format": "txt",
+      "bill_path": "eval/generated_cases/CLM-EVAL-002/CLM-EVAL-002_bill.csv",
+      "record_path": "eval/generated_cases/CLM-EVAL-002/CLM-EVAL-002_record.txt",
+      "report_path": "eval/results/reports/CLM-EVAL-002_report.json",
+      "expected_flags": [],
+      "predicted_flags": [],
+      "missing_flags": [],
+      "extra_flags": [],
+      "metrics": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "risk_score": 0,
+      "dollars_at_risk": 0.0,
+      "ai_trace_count": 4,
+      "record_input_type": "text",
+      "ocr_used": false
+    },
+    {
+      "case_id": "CLM-EVAL-003",
+      "title": "Duplicate chest X-ray",
+      "bill_format": "json",
+      "record_format": "txt",
+      "bill_path": "eval/generated_cases/CLM-EVAL-003/CLM-EVAL-003_bill.json",
+      "record_path": "eval/generated_cases/CLM-EVAL-003/CLM-EVAL-003_record.txt",
+      "report_path": "eval/results/reports/CLM-EVAL-003_report.json",
+      "expected_flags": [
+        {
+          "line_id": "L2",
+          "rule": "DUPLICATE"
+        }
+      ],
+      "predicted_flags": [
+        {
+          "line_id": "L2",
+          "rule": "DUPLICATE"
+        }
+      ],
+      "missing_flags": [],
+      "extra_flags": [],
+      "metrics": {
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "risk_score": 27,
+      "dollars_at_risk": 180.0,
+      "ai_trace_count": 2,
+      "record_input_type": "text",
+      "ocr_used": false
+    },
+    {
+      "case_id": "CLM-EVAL-004",
+      "title": "Excessive venipuncture units",
+      "bill_format": "json",
+      "record_format": "txt",
+      "bill_path": "eval/generated_cases/CLM-EVAL-004/CLM-EVAL-004_bill.json",
+      "record_path": "eval/generated_cases/CLM-EVAL-004/CLM-EVAL-004_record.txt",
+      "report_path": "eval/results/reports/CLM-EVAL-004_report.json",
+      "expected_flags": [
+        {
+          "line_id": "L1",
+          "rule": "MUE_UNITS"
+        }
+      ],
+      "predicted_flags": [
+        {
+          "line_id": "L1",
+          "rule": "MUE_UNITS"
+        }
+      ],
+      "missing_flags": [],
+      "extra_flags": [],
+      "metrics": {
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "risk_score": 42,
+      "dollars_at_risk": 90.0,
+      "ai_trace_count": 1,
+      "record_input_type": "text",
+      "ocr_used": false
+    },
+    {
+      "case_id": "CLM-EVAL-005",
+      "title": "Bundled ECG tracing",
+      "bill_format": "xlsx",
+      "record_format": "txt",
+      "bill_path": "eval/generated_cases/CLM-EVAL-005/CLM-EVAL-005_bill.xlsx",
+      "record_path": "eval/generated_cases/CLM-EVAL-005/CLM-EVAL-005_record.txt",
+      "report_path": "eval/results/reports/CLM-EVAL-005_report.json",
+      "expected_flags": [
+        {
+          "line_id": "L2",
+          "rule": "NCCI_BUNDLE"
+        },
+        {
+          "line_id": "L2",
+          "rule": "UNSUPPORTED"
+        }
+      ],
+      "predicted_flags": [
+        {
+          "line_id": "L2",
+          "rule": "NCCI_BUNDLE"
+        },
+        {
+          "line_id": "L2",
+          "rule": "UNSUPPORTED"
+        }
+      ],
+      "missing_flags": [],
+      "extra_flags": [],
+      "metrics": {
+        "true_positive": 2,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "risk_score": 43,
+      "dollars_at_risk": 40.0,
+      "ai_trace_count": 2,
+      "record_input_type": "text",
+      "ocr_used": false
+    },
+    {
+      "case_id": "CLM-EVAL-006",
+      "title": "CT head absent from record",
+      "bill_format": "pdf",
+      "record_format": "txt",
+      "bill_path": "eval/generated_cases/CLM-EVAL-006/CLM-EVAL-006_bill.pdf",
+      "record_path": "eval/generated_cases/CLM-EVAL-006/CLM-EVAL-006_record.txt",
+      "report_path": "eval/results/reports/CLM-EVAL-006_report.json",
+      "expected_flags": [
+        {
+          "line_id": "L1",
+          "rule": "MEDICAL_NECESSITY"
+        },
+        {
+          "line_id": "L1",
+          "rule": "NO_DOCUMENTATION"
+        }
+      ],
+      "predicted_flags": [
+        {
+          "line_id": "L1",
+          "rule": "MEDICAL_NECESSITY"
+        },
+        {
+          "line_id": "L1",
+          "rule": "NO_DOCUMENTATION"
+        }
+      ],
+      "missing_flags": [],
+      "extra_flags": [],
+      "metrics": {
+        "true_positive": 2,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "risk_score": 72,
+      "dollars_at_risk": 950.0,
+      "ai_trace_count": 1,
+      "record_input_type": "text",
+      "ocr_used": false
+    },
+    {
+      "case_id": "CLM-EVAL-007",
+      "title": "Ultrasound lacks medical necessity diagnosis",
+      "bill_format": "json",
+      "record_format": "txt",
+      "bill_path": "eval/generated_cases/CLM-EVAL-007/CLM-EVAL-007_bill.json",
+      "record_path": "eval/generated_cases/CLM-EVAL-007/CLM-EVAL-007_record.txt",
+      "report_path": "eval/results/reports/CLM-EVAL-007_report.json",
+      "expected_flags": [
+        {
+          "line_id": "L1",
+          "rule": "MEDICAL_NECESSITY"
+        }
+      ],
+      "predicted_flags": [
+        {
+          "line_id": "L1",
+          "rule": "MEDICAL_NECESSITY"
+        }
+      ],
+      "missing_flags": [],
+      "extra_flags": [],
+      "metrics": {
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "risk_score": 42,
+      "dollars_at_risk": 420.0,
+      "ai_trace_count": 1,
+      "record_input_type": "text",
+      "ocr_used": false
+    },
+    {
+      "case_id": "CLM-EVAL-008",
+      "title": "E/M upcoding",
+      "bill_format": "json",
+      "record_format": "txt",
+      "bill_path": "eval/generated_cases/CLM-EVAL-008/CLM-EVAL-008_bill.json",
+      "record_path": "eval/generated_cases/CLM-EVAL-008/CLM-EVAL-008_record.txt",
+      "report_path": "eval/results/reports/CLM-EVAL-008_report.json",
+      "expected_flags": [
+        {
+          "line_id": "L1",
+          "rule": "UPCODE"
+        }
+      ],
+      "predicted_flags": [
+        {
+          "line_id": "L1",
+          "rule": "UPCODE"
+        }
+      ],
+      "missing_flags": [],
+      "extra_flags": [],
+      "metrics": {
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "risk_score": 42,
+      "dollars_at_risk": 310.0,
+      "ai_trace_count": 1,
+      "record_input_type": "text",
+      "ocr_used": false
+    },
+    {
+      "case_id": "CLM-EVAL-009",
+      "title": "Mixed MUE and NCCI findings",
+      "bill_format": "csv",
+      "record_format": "txt",
+      "bill_path": "eval/generated_cases/CLM-EVAL-009/CLM-EVAL-009_bill.csv",
+      "record_path": "eval/generated_cases/CLM-EVAL-009/CLM-EVAL-009_record.txt",
+      "report_path": "eval/results/reports/CLM-EVAL-009_report.json",
+      "expected_flags": [
+        {
+          "line_id": "L3",
+          "rule": "NCCI_BUNDLE"
+        },
+        {
+          "line_id": "L3",
+          "rule": "UNSUPPORTED"
+        },
+        {
+          "line_id": "L4",
+          "rule": "MUE_UNITS"
+        }
+      ],
+      "predicted_flags": [
+        {
+          "line_id": "L3",
+          "rule": "NCCI_BUNDLE"
+        },
+        {
+          "line_id": "L3",
+          "rule": "UNSUPPORTED"
+        },
+        {
+          "line_id": "L4",
+          "rule": "MUE_UNITS"
+        }
+      ],
+      "missing_flags": [],
+      "extra_flags": [],
+      "metrics": {
+        "true_positive": 3,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "risk_score": 53,
+      "dollars_at_risk": 100.0,
+      "ai_trace_count": 4,
+      "record_input_type": "text",
+      "ocr_used": false
+    },
+    {
+      "case_id": "CLM-EVAL-010",
+      "title": "Standalone unsupported ECG tracing line",
+      "bill_format": "json",
+      "record_format": "txt",
+      "bill_path": "eval/generated_cases/CLM-EVAL-010/CLM-EVAL-010_bill.json",
+      "record_path": "eval/generated_cases/CLM-EVAL-010/CLM-EVAL-010_record.txt",
+      "report_path": "eval/results/reports/CLM-EVAL-010_report.json",
+      "expected_flags": [
+        {
+          "line_id": "L1",
+          "rule": "NO_DOCUMENTATION"
+        }
+      ],
+      "predicted_flags": [
+        {
+          "line_id": "L1",
+          "rule": "NO_DOCUMENTATION"
+        }
+      ],
+      "missing_flags": [],
+      "extra_flags": [],
+      "metrics": {
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "risk_score": 51,
+      "dollars_at_risk": 40.0,
+      "ai_trace_count": 1,
+      "record_input_type": "text",
+      "ocr_used": false
+    },
+    {
+      "case_id": "CLM-EVAL-011",
+      "title": "Chest X-ray single view bundled into two view",
+      "bill_format": "json",
+      "record_format": "txt",
+      "bill_path": "eval/generated_cases/CLM-EVAL-011/CLM-EVAL-011_bill.json",
+      "record_path": "eval/generated_cases/CLM-EVAL-011/CLM-EVAL-011_record.txt",
+      "report_path": "eval/results/reports/CLM-EVAL-011_report.json",
+      "expected_flags": [
+        {
+          "line_id": "L2",
+          "rule": "NCCI_BUNDLE"
+        },
+        {
+          "line_id": "L2",
+          "rule": "NO_DOCUMENTATION"
+        }
+      ],
+      "predicted_flags": [
+        {
+          "line_id": "L2",
+          "rule": "NCCI_BUNDLE"
+        },
+        {
+          "line_id": "L2",
+          "rule": "NO_DOCUMENTATION"
+        }
+      ],
+      "missing_flags": [],
+      "extra_flags": [],
+      "metrics": {
+        "true_positive": 2,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "risk_score": 54,
+      "dollars_at_risk": 120.0,
+      "ai_trace_count": 2,
+      "record_input_type": "text",
+      "ocr_used": false
+    },
+    {
+      "case_id": "CLM-EVAL-012",
+      "title": "Scanned clean claim ingestion",
+      "bill_format": "png",
+      "record_format": "png",
+      "bill_path": "eval/generated_cases/CLM-EVAL-012/CLM-EVAL-012_bill_scanned.png",
+      "record_path": "eval/generated_cases/CLM-EVAL-012/CLM-EVAL-012_record_scanned.png",
+      "report_path": "eval/results/reports/CLM-EVAL-012_report.json",
+      "expected_flags": [],
+      "predicted_flags": [],
+      "missing_flags": [],
+      "extra_flags": [],
+      "metrics": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "risk_score": 0,
+      "dollars_at_risk": 0.0,
+      "ai_trace_count": 2,
+      "record_input_type": "image",
+      "ocr_used": true
+    }
+  ]
+}

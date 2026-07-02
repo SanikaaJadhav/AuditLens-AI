@@ -1,0 +1,27 @@
+AUDITLENS AI SYNTHETIC CLINICAL RECORD
+This is fictional data created for a prototype. It contains no real patient information.
+
+Claim ID: CLM-4004
+Patient: Aisha Johnson
+Patient ID: PAT-304
+Date of Service: 2025-03-04
+Provider: Summit Community Clinic
+
+--- Page 1 ---
+
+Chief Complaint
+Aisha Johnson presents for outpatient evaluation. Symptoms include cough and nausea. No severe headache, neurologic deficit, or head trauma is documented.
+
+Assessment
+1. Acute bronchitis, unspecified (J20.9).
+2. Nausea without vomiting (R11.0).
+
+--- Page 2 ---
+
+Orders and Procedures
+Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort. Result: no acute infiltrate and no pleural effusion.
+
+Complete abdominal ultrasound was performed on 2025-03-04 after patient concern about nausea. The note documents nausea only and does not document abdominal pain, abnormal liver enzymes, suspected gallbladder disease, jaundice, trauma, mass, or other coverage-supporting indication.
+
+Medical Decision Making
+The visit involved low complexity. No CT head was ordered, performed, or discussed.

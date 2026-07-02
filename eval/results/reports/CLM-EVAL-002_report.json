@@ -1,0 +1,342 @@
+{
+  "claim_id": "CLM-EVAL-002",
+  "generated_at": "2026-06-30T22:03:20.079625",
+  "claim": {
+    "claim_id": "CLM-EVAL-002",
+    "patient": {
+      "patient_id": "PAT-002",
+      "name": "Synthetic Patient 002",
+      "date_of_birth": "1977-09-18"
+    },
+    "provider": {
+      "provider_id": "PRV-EVAL",
+      "name": "AuditLens Evaluation Clinic",
+      "specialty": "Family Medicine"
+    },
+    "service_date": "2025-03-04",
+    "lines": [
+      {
+        "line_id": "L1",
+        "code": "71046",
+        "code_system": "CPT",
+        "description": "Chest X-ray 2 views",
+        "units": 1,
+        "charge": 180.0,
+        "service_date": "2025-03-04",
+        "modifiers": [],
+        "place_of_service": "11"
+      },
+      {
+        "line_id": "L2",
+        "code": "93000",
+        "code_system": "CPT",
+        "description": "Electrocardiogram complete",
+        "units": 1,
+        "charge": 75.0,
+        "service_date": "2025-03-04",
+        "modifiers": [],
+        "place_of_service": "11"
+      },
+      {
+        "line_id": "L3",
+        "code": "36415",
+        "code_system": "CPT",
+        "description": "Venipuncture",
+        "units": 1,
+        "charge": 30.0,
+        "service_date": "2025-03-04",
+        "modifiers": [],
+        "place_of_service": "11"
+      },
+      {
+        "line_id": "L4",
+        "code": "76700",
+        "code_system": "CPT",
+        "description": "Complete abdominal ultrasound",
+        "units": 1,
+        "charge": 420.0,
+        "service_date": "2025-03-04",
+        "modifiers": [],
+        "place_of_service": "11"
+      }
+    ]
+  },
+  "evidence": {
+    "claim_id": "CLM-1001",
+    "patient_id": "PAT-002",
+    "documented_diagnoses": [
+      {
+        "evidence_id": "DX1",
+        "type": "diagnosis",
+        "code": "J20.9",
+        "description": "Acute bronchitis, unspecified",
+        "date": "2025-03-04",
+        "source_span": "Acute bronchitis, unspecified (J20.9).",
+        "page": 1
+      },
+      {
+        "evidence_id": "DX2",
+        "type": "diagnosis",
+        "code": "R07.89",
+        "description": "Other chest pain",
+        "date": "2025-03-04",
+        "source_span": "Other chest pain (R07.89).",
+        "page": 1
+      },
+      {
+        "evidence_id": "DX3",
+        "type": "diagnosis",
+        "code": "R10.9",
+        "description": "Unspecified abdominal pain",
+        "date": "2025-03-04",
+        "source_span": "Unspecified abdominal pain (R10.9).",
+        "page": 1
+      }
+    ],
+    "documented_procedures": [
+      {
+        "evidence_id": "PX1",
+        "type": "procedure",
+        "code": "71046",
+        "description": "Chest X-ray, two views",
+        "date": "2025-03-04",
+        "source_span": "Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort. Result: no acute infiltrate and no pleural effusion.",
+        "page": 2
+      },
+      {
+        "evidence_id": "PX2",
+        "type": "procedure",
+        "code": "93000",
+        "description": "Electrocardiogram complete",
+        "date": "2025-03-04",
+        "source_span": "Electrocardiogram was performed and interpreted in clinic because the patient reported chest discomfort. Result: normal sinus rhythm, no acute ST-T changes.",
+        "page": 2
+      },
+      {
+        "evidence_id": "PX3",
+        "type": "procedure",
+        "code": "36415",
+        "description": "Venipuncture",
+        "date": "2025-03-04",
+        "source_span": "One venous blood sample was collected for CBC and comprehensive metabolic panel on 2025-03-04.",
+        "page": 2
+      },
+      {
+        "evidence_id": "PX4",
+        "type": "procedure",
+        "code": "76700",
+        "description": "Complete abdominal ultrasound",
+        "date": "2025-03-04",
+        "source_span": "Complete abdominal ultrasound was performed on 2025-03-04 after patient concern about nausea. The note documents nausea only and does not document abdominal pain, abnormal liver enzymes, suspected gallbladder disease, jaundice, trauma, mass, or other coverage-supporting indication.",
+        "page": 2
+      }
+    ],
+    "documented_visit_complexity": {
+      "supported_level": "low",
+      "supported_code": "99213",
+      "source_span": "The visit involved low complexity.",
+      "page": 2
+    }
+  },
+  "line_results": [
+    {
+      "line_id": "L1",
+      "code": "71046",
+      "status": "supported",
+      "flags": [],
+      "recommended_action": "pay"
+    },
+    {
+      "line_id": "L2",
+      "code": "93000",
+      "status": "supported",
+      "flags": [],
+      "recommended_action": "pay"
+    },
+    {
+      "line_id": "L3",
+      "code": "36415",
+      "status": "supported",
+      "flags": [],
+      "recommended_action": "pay"
+    },
+    {
+      "line_id": "L4",
+      "code": "76700",
+      "status": "supported",
+      "flags": [],
+      "recommended_action": "pay"
+    }
+  ],
+  "flags": [],
+  "total_charge": 705.0,
+  "dollars_at_risk": 0.0,
+  "risk_score": 0,
+  "recommended_action": "pay",
+  "metrics": {
+    "total_lines": 4,
+    "supported_lines": 4,
+    "flagged_lines": 0,
+    "high_severity_flags": 0,
+    "medium_severity_flags": 0,
+    "low_severity_flags": 0,
+    "flag_counts_by_rule": {},
+    "flag_counts_by_severity": {},
+    "dollars_at_risk_by_rule": {},
+    "top_risk_lines": []
+  },
+  "summary": "AuditLens found no review findings in this claim. Recommended action: pay.",
+  "processing_metadata": {
+    "bill_filename": "CLM-EVAL-002_bill.csv",
+    "record_filename": "CLM-EVAL-002_record.txt",
+    "record_input_type": "text",
+    "ocr_used": false,
+    "ocr_engine": null,
+    "extraction_method": "LLM schema extraction with deterministic fallback",
+    "verification_method": "Fallback verifier with deterministic rule guardrails",
+    "rule_guardrails_applied": [
+      "DUPLICATE",
+      "MUE_UNITS",
+      "NCCI_BUNDLE",
+      "MEDICAL_NECESSITY"
+    ]
+  },
+  "ai_traces": [
+    {
+      "line_id": "L1",
+      "code": "71046",
+      "verification_mode": "mock_fallback",
+      "fallback_used": true,
+      "retrieval_query": "71046 Chest X-ray 2 views CPT",
+      "retrieved_passages": [
+        {
+          "rank": 1,
+          "text": "--- Page 2 --- Orders and Procedures Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort. Result: no acute infiltrate and no pleural effusion.",
+          "page": 1,
+          "score": 0.8
+        },
+        {
+          "rank": 2,
+          "text": "Electrocardiogram was performed and interpreted in clinic because the patient reported chest discomfort. Result: normal sinus rhythm, no acute ST-T changes.",
+          "page": 2,
+          "score": 0.175
+        },
+        {
+          "rank": 3,
+          "text": "Complete abdominal ultrasound was performed on 2025-03-04 after patient concern about nausea. The note documents nausea only and does not document abdominal pain, abnormal liver enzymes, suspected gallbladder disease, jaundice, trauma, mass, or other coverage-supporting indication.",
+          "page": 2,
+          "score": 0.175
+        }
+      ],
+      "llm_supported": true,
+      "llm_issue": "SUPPORTED",
+      "confidence": 0.9,
+      "citation": "--- Page 2 --- Orders and Procedures Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort. Result: no acute infiltrate and no pleural effusion.",
+      "page": 1,
+      "rationale": "The clinical record contains support for billed code 71046.",
+      "guardrail_rules": []
+    },
+    {
+      "line_id": "L2",
+      "code": "93000",
+      "verification_mode": "mock_fallback",
+      "fallback_used": true,
+      "retrieval_query": "93000 Electrocardiogram complete CPT",
+      "retrieved_passages": [
+        {
+          "rank": 1,
+          "text": "Electrocardiogram was performed and interpreted in clinic because the patient reported chest discomfort. Result: normal sinus rhythm, no acute ST-T changes.",
+          "page": 2,
+          "score": 0.7167
+        },
+        {
+          "rank": 2,
+          "text": "AUDITLENS AI SYNTHETIC EVALUATION CLINICAL RECORD This fictional record contains no real patient information.",
+          "page": null,
+          "score": 0.05
+        },
+        {
+          "rank": 3,
+          "text": "--- Page 2 --- Orders and Procedures Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort. Result: no acute infiltrate and no pleural effusion.",
+          "page": 1,
+          "score": 0.05
+        }
+      ],
+      "llm_supported": true,
+      "llm_issue": "SUPPORTED",
+      "confidence": 0.9,
+      "citation": "Electrocardiogram was performed and interpreted in clinic because the patient reported chest discomfort. Result: normal sinus rhythm, no acute ST-T changes.",
+      "page": 2,
+      "rationale": "The clinical record contains support for billed code 93000.",
+      "guardrail_rules": []
+    },
+    {
+      "line_id": "L3",
+      "code": "36415",
+      "verification_mode": "mock_fallback",
+      "fallback_used": true,
+      "retrieval_query": "36415 Venipuncture CPT",
+      "retrieved_passages": [
+        {
+          "rank": 1,
+          "text": "One venous blood sample was collected for CBC and comprehensive metabolic panel on 2025-03-04.",
+          "page": 2,
+          "score": 0.5714
+        },
+        {
+          "rank": 2,
+          "text": "AUDITLENS AI SYNTHETIC EVALUATION CLINICAL RECORD This fictional record contains no real patient information.",
+          "page": null,
+          "score": 0.05
+        },
+        {
+          "rank": 3,
+          "text": "--- Page 2 --- Orders and Procedures Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort. Result: no acute infiltrate and no pleural effusion.",
+          "page": 1,
+          "score": 0.05
+        }
+      ],
+      "llm_supported": true,
+      "llm_issue": "SUPPORTED",
+      "confidence": 0.9,
+      "citation": "One venous blood sample was collected for CBC and comprehensive metabolic panel on 2025-03-04.",
+      "page": 2,
+      "rationale": "The clinical record contains support for billed code 36415.",
+      "guardrail_rules": []
+    },
+    {
+      "line_id": "L4",
+      "code": "76700",
+      "verification_mode": "mock_fallback",
+      "fallback_used": true,
+      "retrieval_query": "76700 Complete abdominal ultrasound CPT",
+      "retrieved_passages": [
+        {
+          "rank": 1,
+          "text": "Complete abdominal ultrasound was performed on 2025-03-04 after patient concern about nausea. The note documents nausea only and does not document abdominal pain, abnormal liver enzymes, suspected gallbladder disease, jaundice, trauma, mass, or other coverage-supporting indication.",
+          "page": 2,
+          "score": 0.7167
+        },
+        {
+          "rank": 2,
+          "text": "--- Page 2 --- Orders and Procedures Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort. Result: no acute infiltrate and no pleural effusion.",
+          "page": 1,
+          "score": 0.2167
+        },
+        {
+          "rank": 3,
+          "text": "--- Page 1 --- Assessment 1. Acute bronchitis, unspecified (J20.9). 2. Other chest pain (R07.89). 3. Unspecified abdominal pain (R10.9).",
+          "page": null,
+          "score": 0.1667
+        }
+      ],
+      "llm_supported": true,
+      "llm_issue": "SUPPORTED",
+      "confidence": 0.9,
+      "citation": "Complete abdominal ultrasound was performed on 2025-03-04 after patient concern about nausea. The note documents nausea only and does not document abdominal pain, abnormal liver enzymes, suspected gallbladder disease, jaundice, trauma, mass, or other coverage-supporting indication.",
+      "page": 2,
+      "rationale": "The clinical record contains support for billed code 76700.",
+      "guardrail_rules": []
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "line_id": "L3",
+    "rule": "NCCI_BUNDLE"
+  },
+  {
+    "line_id": "L3",
+    "rule": "UNSUPPORTED"
+  },
+  {
+    "line_id": "L4",
+    "rule": "MUE_UNITS"
+  }
+]

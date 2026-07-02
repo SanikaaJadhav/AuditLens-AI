@@ -1,0 +1,30 @@
+AUDITLENS AI SYNTHETIC CLINICAL RECORD
+This is fictional data created for a prototype. It contains no real patient information.
+
+Claim ID: CLM-2002
+Patient: Priya Shah
+Patient ID: PAT-102
+Date of Service: 2025-03-04
+Provider: Lakeview Primary Care
+
+--- Page 1 ---
+
+Chief Complaint
+Priya Shah presents for outpatient evaluation. Symptoms include cough and right upper abdominal discomfort.
+
+Assessment
+1. Acute bronchitis, unspecified (J20.9).
+2. Cough, unspecified (R05.9).
+3. Unspecified abdominal pain (R10.9).
+
+--- Page 2 ---
+
+Orders and Procedures
+Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort. Result: no acute infiltrate and no pleural effusion.
+
+One venous blood sample was collected for CBC and comprehensive metabolic panel on 2025-03-04.
+
+Complete abdominal ultrasound was performed on 2025-03-04 after patient concern about abdominal pain. The note documents abdominal pain and concern for biliary disease.
+
+Medical Decision Making
+The visit involved low complexity. No CT head was ordered, performed, or discussed.

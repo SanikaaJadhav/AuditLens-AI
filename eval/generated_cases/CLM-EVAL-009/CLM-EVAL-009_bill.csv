@@ -1,0 +1,5 @@
+claim_id,patient_id,patient_name,date_of_birth,provider_id,provider_name,provider_specialty,service_date,line_id,code,code_system,description,units,charge,modifiers,place_of_service
+CLM-EVAL-009,PAT-009,Synthetic Patient 009,1977-09-18,PRV-EVAL,AuditLens Evaluation Clinic,Family Medicine,2025-03-04,L1,71046,CPT,Chest X-ray 2 views,1,180,,11
+CLM-EVAL-009,PAT-009,Synthetic Patient 009,1977-09-18,PRV-EVAL,AuditLens Evaluation Clinic,Family Medicine,2025-03-04,L2,93000,CPT,Electrocardiogram complete,1,75,,11
+CLM-EVAL-009,PAT-009,Synthetic Patient 009,1977-09-18,PRV-EVAL,AuditLens Evaluation Clinic,Family Medicine,2025-03-04,L3,93005,CPT,Electrocardiogram tracing only,1,40,,11
+CLM-EVAL-009,PAT-009,Synthetic Patient 009,1977-09-18,PRV-EVAL,AuditLens Evaluation Clinic,Family Medicine,2025-03-04,L4,36415,CPT,Venipuncture,2,60,,11

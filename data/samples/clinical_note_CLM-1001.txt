@@ -1,0 +1,47 @@
+AUDITLENS AI SYNTHETIC CLINICAL RECORD
+This is fictional data created for a prototype. It contains no real patient information.
+
+Patient: Jordan Miles
+Patient ID: PAT-001
+Date of Birth: 1977-09-18
+Date of Service: 2025-03-04
+Provider: Northstar Family Clinic
+
+--- Page 1 ---
+
+Chief Complaint
+Jordan Miles is a 47-year-old established patient presenting with seven days of cough, intermittent fever, mild chest discomfort when coughing, and nausea without abdominal pain.
+
+History of Present Illness
+The patient reports productive cough, fatigue, and temperature to 100.6 F at home. Chest discomfort is brief and occurs with coughing. The patient denies severe headache, head injury, loss of consciousness, focal weakness, confusion, vision change, severe abdominal pain, right upper quadrant pain, or vomiting.
+
+Exam
+Vitals: BP 138/84, HR 86, RR 16, SpO2 98% on room air, temperature 99.8 F.
+Lungs: scattered rhonchi, no respiratory distress.
+Cardiac: regular rate and rhythm.
+Abdomen: soft, non-tender, no guarding, no right upper quadrant tenderness.
+Neurologic: alert and oriented, normal gait, no focal deficit.
+
+Assessment
+1. Acute bronchitis, unspecified (J20.9).
+2. Cough, unspecified (R05.9).
+3. Other chest pain / chest discomfort associated with cough (R07.89).
+4. Nausea without vomiting (R11.0).
+5. Essential hypertension, stable (I10).
+
+--- Page 2 ---
+
+Orders and Procedures
+Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort. Result: no acute infiltrate and no pleural effusion.
+
+Electrocardiogram was performed and interpreted in clinic because the patient reported chest discomfort. Result: normal sinus rhythm, no acute ST-T changes.
+
+One venous blood sample was collected for CBC and comprehensive metabolic panel on 2025-03-04.
+
+Complete abdominal ultrasound was performed on 2025-03-04 after patient concern about nausea. The note documents nausea only and does not document abdominal pain, abnormal liver enzymes, suspected gallbladder disease, jaundice, trauma, mass, or other coverage-supporting indication.
+
+Medical Decision Making
+The visit involved moderate complexity. The clinician reviewed vitals, performed focused cardiopulmonary and abdominal exams, ordered chest imaging and ECG, and recommended conservative treatment for acute bronchitis. No emergency neurologic symptoms were present. No CT head was ordered, performed, or discussed.
+
+Plan
+Supportive care, hydration, antipyretics as needed, return precautions for worsening chest pain, dyspnea, persistent fever, neurologic symptoms, or abdominal pain. Follow up with primary care in one week if symptoms persist.

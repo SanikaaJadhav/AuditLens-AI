@@ -1,0 +1,163 @@
+{
+  "claim_id": "CLM-EVAL-008",
+  "generated_at": "2026-06-30T22:03:20.403589",
+  "claim": {
+    "claim_id": "CLM-EVAL-008",
+    "patient": {
+      "patient_id": "PAT-008",
+      "name": "Synthetic Patient 008",
+      "date_of_birth": "1977-09-18"
+    },
+    "provider": {
+      "provider_id": "PRV-EVAL",
+      "name": "AuditLens Evaluation Clinic",
+      "specialty": "Family Medicine"
+    },
+    "service_date": "2025-03-04",
+    "lines": [
+      {
+        "line_id": "L1",
+        "code": "99215",
+        "code_system": "CPT",
+        "description": "Established patient office visit level 5",
+        "units": 1,
+        "charge": 310.0,
+        "service_date": null,
+        "modifiers": [],
+        "place_of_service": "11"
+      }
+    ]
+  },
+  "evidence": {
+    "claim_id": "CLM-1001",
+    "patient_id": "PAT-008",
+    "documented_diagnoses": [
+      {
+        "evidence_id": "DX1",
+        "type": "diagnosis",
+        "code": "J20.9",
+        "description": "Acute bronchitis, unspecified",
+        "date": "2025-03-04",
+        "source_span": "Acute bronchitis, unspecified (J20.9).",
+        "page": 1
+      }
+    ],
+    "documented_procedures": [],
+    "documented_visit_complexity": {
+      "supported_level": "moderate",
+      "supported_code": "99214",
+      "source_span": "The visit involved moderate complexity.",
+      "page": 2
+    }
+  },
+  "line_results": [
+    {
+      "line_id": "L1",
+      "code": "99215",
+      "status": "rule_violation",
+      "flags": [
+        {
+          "line_id": "L1",
+          "status": "rule_violation",
+          "rule": "UPCODE",
+          "severity": "medium",
+          "citation": "The visit involved moderate complexity.",
+          "page": 2,
+          "confidence": 0.92,
+          "recommended_action": "escalate",
+          "message": "Line L1 bills 99215, but documentation supports 99214 based on moderate complexity."
+        }
+      ],
+      "recommended_action": "request_records"
+    }
+  ],
+  "flags": [
+    {
+      "line_id": "L1",
+      "status": "rule_violation",
+      "rule": "UPCODE",
+      "severity": "medium",
+      "citation": "The visit involved moderate complexity.",
+      "page": 2,
+      "confidence": 0.92,
+      "recommended_action": "escalate",
+      "message": "Line L1 bills 99215, but documentation supports 99214 based on moderate complexity."
+    }
+  ],
+  "total_charge": 310.0,
+  "dollars_at_risk": 310.0,
+  "risk_score": 42,
+  "recommended_action": "request_records",
+  "metrics": {
+    "total_lines": 1,
+    "supported_lines": 0,
+    "flagged_lines": 1,
+    "high_severity_flags": 0,
+    "medium_severity_flags": 1,
+    "low_severity_flags": 0,
+    "flag_counts_by_rule": {
+      "UPCODE": 1
+    },
+    "flag_counts_by_severity": {
+      "medium": 1
+    },
+    "dollars_at_risk_by_rule": {
+      "UPCODE": 310.0
+    },
+    "top_risk_lines": [
+      "L1"
+    ]
+  },
+  "summary": "AuditLens found 1 review finding(s) across 1 of 1 billed line(s). Priority issues include upcode. Estimated dollars at risk: $310.00. Risk score: 42/100. Recommended next action: request records.",
+  "processing_metadata": {
+    "bill_filename": "CLM-EVAL-008_bill.json",
+    "record_filename": "CLM-EVAL-008_record.txt",
+    "record_input_type": "text",
+    "ocr_used": false,
+    "ocr_engine": null,
+    "extraction_method": "LLM schema extraction with deterministic fallback",
+    "verification_method": "Fallback verifier with deterministic rule guardrails",
+    "rule_guardrails_applied": [
+      "DUPLICATE",
+      "MUE_UNITS",
+      "NCCI_BUNDLE",
+      "MEDICAL_NECESSITY"
+    ]
+  },
+  "ai_traces": [
+    {
+      "line_id": "L1",
+      "code": "99215",
+      "verification_mode": "mock_fallback",
+      "fallback_used": true,
+      "retrieval_query": "99215 Established patient office visit level 5 CPT",
+      "retrieved_passages": [
+        {
+          "rank": 1,
+          "text": "Medical Decision Making The visit involved moderate complexity. No CT head was ordered, performed, or discussed.",
+          "page": 2,
+          "score": 0.4944
+        },
+        {
+          "rank": 2,
+          "text": "AUDITLENS AI SYNTHETIC EVALUATION CLINICAL RECORD This fictional record contains no real patient information.",
+          "page": null,
+          "score": 0.05
+        },
+        {
+          "rank": 3,
+          "text": "Patient: Synthetic Patient 008 Patient ID: PAT-008 Date of Service: 2025-03-04 Provider: AuditLens Evaluation Clinic",
+          "page": null,
+          "score": 0.0
+        }
+      ],
+      "llm_supported": false,
+      "llm_issue": "UPCODE",
+      "confidence": 0.92,
+      "citation": "The visit involved moderate complexity.",
+      "page": 2,
+      "rationale": "Line L1 bills 99215, but documentation supports 99214 based on moderate complexity.",
+      "guardrail_rules": []
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "claim_id": "CLM-1001",
+  "patient_id": "PAT-001",
+  "documented_diagnoses": [
+    {
+      "evidence_id": "DX1",
+      "type": "diagnosis",
+      "code": "J20.9",
+      "description": "Acute bronchitis, unspecified",
+      "date": "2025-03-04",
+      "source_span": "Acute bronchitis, unspecified (J20.9).",
+      "page": 1
+    },
+    {
+      "evidence_id": "DX2",
+      "type": "diagnosis",
+      "code": "R05.9",
+      "description": "Cough, unspecified",
+      "date": "2025-03-04",
+      "source_span": "Cough, unspecified (R05.9).",
+      "page": 1
+    },
+    {
+      "evidence_id": "DX3",
+      "type": "diagnosis",
+      "code": "R07.89",
+      "description": "Other chest pain / chest discomfort associated with cough",
+      "date": "2025-03-04",
+      "source_span": "Other chest pain / chest discomfort associated with cough (R07.89).",
+      "page": 1
+    },
+    {
+      "evidence_id": "DX4",
+      "type": "diagnosis",
+      "code": "R11.0",
+      "description": "Nausea without vomiting",
+      "date": "2025-03-04",
+      "source_span": "Nausea without vomiting (R11.0).",
+      "page": 1
+    },
+    {
+      "evidence_id": "DX5",
+      "type": "diagnosis",
+      "code": "I10",
+      "description": "Essential hypertension",
+      "date": "2025-03-04",
+      "source_span": "Essential hypertension, stable (I10).",
+      "page": 1
+    }
+  ],
+  "documented_procedures": [
+    {
+      "evidence_id": "PX1",
+      "type": "procedure",
+      "code": "71046",
+      "description": "Chest X-ray, two views",
+      "date": "2025-03-04",
+      "source_span": "Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort.",
+      "page": 2
+    },
+    {
+      "evidence_id": "PX2",
+      "type": "procedure",
+      "code": "93000",
+      "description": "Electrocardiogram complete",
+      "date": "2025-03-04",
+      "source_span": "Electrocardiogram was performed and interpreted in clinic because the patient reported chest discomfort.",
+      "page": 2
+    },
+    {
+      "evidence_id": "PX3",
+      "type": "procedure",
+      "code": "36415",
+      "description": "Venipuncture",
+      "date": "2025-03-04",
+      "source_span": "One venous blood sample was collected for CBC and comprehensive metabolic panel on 2025-03-04.",
+      "page": 2
+    },
+    {
+      "evidence_id": "PX4",
+      "type": "procedure",
+      "code": "76700",
+      "description": "Complete abdominal ultrasound",
+      "date": "2025-03-04",
+      "source_span": "Complete abdominal ultrasound was performed on 2025-03-04 after patient concern about nausea.",
+      "page": 2
+    }
+  ],
+  "documented_visit_complexity": {
+    "supported_level": "moderate",
+    "supported_code": "99214",
+    "source_span": "The visit involved moderate complexity.",
+    "page": 2
+  }
+}

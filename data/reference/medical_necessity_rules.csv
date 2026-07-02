@@ -1,0 +1,5 @@
+procedure_code,allowed_diagnosis_codes,rule_description
+71046,J20.9|R05.9|R07.89,Chest X-ray is supported by bronchitis cough fever or chest discomfort in this prototype.
+93000,R07.89|R00.2|I10,ECG is supported by chest discomfort palpitations or hypertension in this prototype.
+70450,R51.9|S09.90XA|R41.82,CT head is supported by headache head injury or altered mental status in this prototype.
+76700,R10.9|K80.20|R94.5,Complete abdominal ultrasound is supported by abdominal pain gallbladder disease or abnormal liver studies in this prototype.

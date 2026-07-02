@@ -1,0 +1,189 @@
+{
+  "claim_id": "CLM-EVAL-006",
+  "generated_at": "2026-06-30T22:03:20.345009",
+  "claim": {
+    "claim_id": "CLM-EVAL-006",
+    "patient": {
+      "patient_id": "PAT-006",
+      "name": "Synthetic Patient 006",
+      "date_of_birth": "1977-09-18"
+    },
+    "provider": {
+      "provider_id": "PRV-EVAL",
+      "name": "AuditLens Evaluation Clinic",
+      "specialty": "Family Medicine"
+    },
+    "service_date": "2025-03-04",
+    "lines": [
+      {
+        "line_id": "L1",
+        "code": "70450",
+        "code_system": "CPT",
+        "description": "CT head without contrast",
+        "units": 1,
+        "charge": 950.0,
+        "service_date": "2025-03-04",
+        "modifiers": [],
+        "place_of_service": "11"
+      }
+    ]
+  },
+  "evidence": {
+    "claim_id": "CLM-1001",
+    "patient_id": "PAT-006",
+    "documented_diagnoses": [
+      {
+        "evidence_id": "DX1",
+        "type": "diagnosis",
+        "code": "J20.9",
+        "description": "Acute bronchitis, unspecified",
+        "date": "2025-03-04",
+        "source_span": "Acute bronchitis, unspecified (J20.9).",
+        "page": 1
+      }
+    ],
+    "documented_procedures": [],
+    "documented_visit_complexity": {
+      "supported_level": "low",
+      "supported_code": "99213",
+      "source_span": "The visit involved low complexity.",
+      "page": 2
+    }
+  },
+  "line_results": [
+    {
+      "line_id": "L1",
+      "code": "70450",
+      "status": "multiple_issues",
+      "flags": [
+        {
+          "line_id": "L1",
+          "status": "unsupported",
+          "rule": "NO_DOCUMENTATION",
+          "severity": "high",
+          "citation": "Medical Decision Making The visit involved low complexity. No CT head was ordered, performed, or discussed.",
+          "page": 2,
+          "confidence": 0.95,
+          "recommended_action": "request_records",
+          "message": "The clinical record states that no CT head was ordered, performed, or discussed."
+        },
+        {
+          "line_id": "L1",
+          "status": "rule_violation",
+          "rule": "MEDICAL_NECESSITY",
+          "severity": "high",
+          "citation": null,
+          "page": null,
+          "confidence": 1.0,
+          "recommended_action": "escalate",
+          "message": "Code 70450 lacks a documented diagnosis from the allowed set (R41.82, R51.9, S09.90XA). Documented diagnoses: J20.9. CT head is supported by headache head injury or altered mental status in this prototype."
+        }
+      ],
+      "recommended_action": "escalate"
+    }
+  ],
+  "flags": [
+    {
+      "line_id": "L1",
+      "status": "unsupported",
+      "rule": "NO_DOCUMENTATION",
+      "severity": "high",
+      "citation": "Medical Decision Making The visit involved low complexity. No CT head was ordered, performed, or discussed.",
+      "page": 2,
+      "confidence": 0.95,
+      "recommended_action": "request_records",
+      "message": "The clinical record states that no CT head was ordered, performed, or discussed."
+    },
+    {
+      "line_id": "L1",
+      "status": "rule_violation",
+      "rule": "MEDICAL_NECESSITY",
+      "severity": "high",
+      "citation": null,
+      "page": null,
+      "confidence": 1.0,
+      "recommended_action": "escalate",
+      "message": "Code 70450 lacks a documented diagnosis from the allowed set (R41.82, R51.9, S09.90XA). Documented diagnoses: J20.9. CT head is supported by headache head injury or altered mental status in this prototype."
+    }
+  ],
+  "total_charge": 950.0,
+  "dollars_at_risk": 950.0,
+  "risk_score": 72,
+  "recommended_action": "escalate",
+  "metrics": {
+    "total_lines": 1,
+    "supported_lines": 0,
+    "flagged_lines": 1,
+    "high_severity_flags": 2,
+    "medium_severity_flags": 0,
+    "low_severity_flags": 0,
+    "flag_counts_by_rule": {
+      "MEDICAL_NECESSITY": 1,
+      "NO_DOCUMENTATION": 1
+    },
+    "flag_counts_by_severity": {
+      "high": 2
+    },
+    "dollars_at_risk_by_rule": {
+      "MEDICAL_NECESSITY": 950.0,
+      "NO_DOCUMENTATION": 950.0
+    },
+    "top_risk_lines": [
+      "L1"
+    ]
+  },
+  "summary": "AuditLens found 2 review finding(s) across 1 of 1 billed line(s). Priority issues include no documentation, medical necessity. Estimated dollars at risk: $950.00. Risk score: 72/100. Recommended next action: escalate.",
+  "processing_metadata": {
+    "bill_filename": "CLM-EVAL-006_bill.pdf",
+    "record_filename": "CLM-EVAL-006_record.txt",
+    "record_input_type": "text",
+    "ocr_used": false,
+    "ocr_engine": null,
+    "extraction_method": "LLM schema extraction with deterministic fallback",
+    "verification_method": "Fallback verifier with deterministic rule guardrails",
+    "rule_guardrails_applied": [
+      "DUPLICATE",
+      "MUE_UNITS",
+      "NCCI_BUNDLE",
+      "MEDICAL_NECESSITY"
+    ]
+  },
+  "ai_traces": [
+    {
+      "line_id": "L1",
+      "code": "70450",
+      "verification_mode": "mock_fallback",
+      "fallback_used": true,
+      "retrieval_query": "70450 CT head without contrast CPT",
+      "retrieved_passages": [
+        {
+          "rank": 1,
+          "text": "Medical Decision Making The visit involved low complexity. No CT head was ordered, performed, or discussed.",
+          "page": 2,
+          "score": 0.55
+        },
+        {
+          "rank": 2,
+          "text": "AUDITLENS AI SYNTHETIC EVALUATION CLINICAL RECORD This fictional record contains no real patient information.",
+          "page": null,
+          "score": 0.05
+        },
+        {
+          "rank": 3,
+          "text": "Patient: Synthetic Patient 006 Patient ID: PAT-006 Date of Service: 2025-03-04 Provider: AuditLens Evaluation Clinic",
+          "page": null,
+          "score": 0.0
+        }
+      ],
+      "llm_supported": false,
+      "llm_issue": "NO_DOCUMENTATION",
+      "confidence": 0.95,
+      "citation": "Medical Decision Making The visit involved low complexity. No CT head was ordered, performed, or discussed.",
+      "page": 2,
+      "rationale": "The clinical record states that no CT head was ordered, performed, or discussed.",
+      "guardrail_rules": [
+        "MEDICAL_NECESSITY"
+      ]
+    }
+  ]
+}

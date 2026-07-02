@@ -1,0 +1,260 @@
+{
+  "claim_id": "CLM-EVAL-011",
+  "generated_at": "2026-06-30T22:03:20.487468",
+  "claim": {
+    "claim_id": "CLM-EVAL-011",
+    "patient": {
+      "patient_id": "PAT-011",
+      "name": "Synthetic Patient 011",
+      "date_of_birth": "1977-09-18"
+    },
+    "provider": {
+      "provider_id": "PRV-EVAL",
+      "name": "AuditLens Evaluation Clinic",
+      "specialty": "Family Medicine"
+    },
+    "service_date": "2025-03-04",
+    "lines": [
+      {
+        "line_id": "L1",
+        "code": "71046",
+        "code_system": "CPT",
+        "description": "Chest X-ray 2 views",
+        "units": 1,
+        "charge": 180.0,
+        "service_date": null,
+        "modifiers": [],
+        "place_of_service": "11"
+      },
+      {
+        "line_id": "L2",
+        "code": "71045",
+        "code_system": "CPT",
+        "description": "Chest X-ray single view",
+        "units": 1,
+        "charge": 120.0,
+        "service_date": null,
+        "modifiers": [],
+        "place_of_service": "11"
+      }
+    ]
+  },
+  "evidence": {
+    "claim_id": "CLM-1001",
+    "patient_id": "PAT-011",
+    "documented_diagnoses": [
+      {
+        "evidence_id": "DX1",
+        "type": "diagnosis",
+        "code": "J20.9",
+        "description": "Acute bronchitis, unspecified",
+        "date": "2025-03-04",
+        "source_span": "Acute bronchitis, unspecified (J20.9).",
+        "page": 1
+      },
+      {
+        "evidence_id": "DX2",
+        "type": "diagnosis",
+        "code": "R05.9",
+        "description": "Cough, unspecified",
+        "date": "2025-03-04",
+        "source_span": "Cough, unspecified (R05.9).",
+        "page": 1
+      }
+    ],
+    "documented_procedures": [
+      {
+        "evidence_id": "PX1",
+        "type": "procedure",
+        "code": "71046",
+        "description": "Chest X-ray, two views",
+        "date": "2025-03-04",
+        "source_span": "Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort. Result: no acute infiltrate and no pleural effusion.",
+        "page": 2
+      }
+    ],
+    "documented_visit_complexity": {
+      "supported_level": "low",
+      "supported_code": "99213",
+      "source_span": "The visit involved low complexity.",
+      "page": 2
+    }
+  },
+  "line_results": [
+    {
+      "line_id": "L1",
+      "code": "71046",
+      "status": "supported",
+      "flags": [],
+      "recommended_action": "pay"
+    },
+    {
+      "line_id": "L2",
+      "code": "71045",
+      "status": "multiple_issues",
+      "flags": [
+        {
+          "line_id": "L2",
+          "status": "unsupported",
+          "rule": "NO_DOCUMENTATION",
+          "severity": "high",
+          "citation": null,
+          "page": null,
+          "confidence": 0.75,
+          "recommended_action": "request_records",
+          "message": "No supporting documentation was found for billed code 71045."
+        },
+        {
+          "line_id": "L2",
+          "status": "rule_violation",
+          "rule": "NCCI_BUNDLE",
+          "severity": "high",
+          "citation": null,
+          "page": null,
+          "confidence": 1.0,
+          "recommended_action": "deny_line",
+          "message": "Code 71045 on line L2 is bundled into code 71046 on line L1. Single-view chest X-ray is bundled into two-view chest X-ray when billed on the same date."
+        }
+      ],
+      "recommended_action": "escalate"
+    }
+  ],
+  "flags": [
+    {
+      "line_id": "L2",
+      "status": "unsupported",
+      "rule": "NO_DOCUMENTATION",
+      "severity": "high",
+      "citation": null,
+      "page": null,
+      "confidence": 0.75,
+      "recommended_action": "request_records",
+      "message": "No supporting documentation was found for billed code 71045."
+    },
+    {
+      "line_id": "L2",
+      "status": "rule_violation",
+      "rule": "NCCI_BUNDLE",
+      "severity": "high",
+      "citation": null,
+      "page": null,
+      "confidence": 1.0,
+      "recommended_action": "deny_line",
+      "message": "Code 71045 on line L2 is bundled into code 71046 on line L1. Single-view chest X-ray is bundled into two-view chest X-ray when billed on the same date."
+    }
+  ],
+  "total_charge": 300.0,
+  "dollars_at_risk": 120.0,
+  "risk_score": 54,
+  "recommended_action": "escalate",
+  "metrics": {
+    "total_lines": 2,
+    "supported_lines": 1,
+    "flagged_lines": 1,
+    "high_severity_flags": 2,
+    "medium_severity_flags": 0,
+    "low_severity_flags": 0,
+    "flag_counts_by_rule": {
+      "NCCI_BUNDLE": 1,
+      "NO_DOCUMENTATION": 1
+    },
+    "flag_counts_by_severity": {
+      "high": 2
+    },
+    "dollars_at_risk_by_rule": {
+      "NCCI_BUNDLE": 120.0,
+      "NO_DOCUMENTATION": 120.0
+    },
+    "top_risk_lines": [
+      "L2"
+    ]
+  },
+  "summary": "AuditLens found 2 review finding(s) across 1 of 2 billed line(s). Priority issues include no documentation, ncci bundle. Estimated dollars at risk: $120.00. Risk score: 54/100. Recommended next action: escalate.",
+  "processing_metadata": {
+    "bill_filename": "CLM-EVAL-011_bill.json",
+    "record_filename": "CLM-EVAL-011_record.txt",
+    "record_input_type": "text",
+    "ocr_used": false,
+    "ocr_engine": null,
+    "extraction_method": "LLM schema extraction with deterministic fallback",
+    "verification_method": "Fallback verifier with deterministic rule guardrails",
+    "rule_guardrails_applied": [
+      "DUPLICATE",
+      "MUE_UNITS",
+      "NCCI_BUNDLE",
+      "MEDICAL_NECESSITY"
+    ]
+  },
+  "ai_traces": [
+    {
+      "line_id": "L1",
+      "code": "71046",
+      "verification_mode": "mock_fallback",
+      "fallback_used": true,
+      "retrieval_query": "71046 Chest X-ray 2 views CPT",
+      "retrieved_passages": [
+        {
+          "rank": 1,
+          "text": "--- Page 2 --- Orders and Procedures Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort. Result: no acute infiltrate and no pleural effusion.",
+          "page": 1,
+          "score": 0.8
+        },
+        {
+          "rank": 2,
+          "text": "AUDITLENS AI SYNTHETIC EVALUATION CLINICAL RECORD This fictional record contains no real patient information.",
+          "page": null,
+          "score": 0.05
+        },
+        {
+          "rank": 3,
+          "text": "Medical Decision Making The visit involved low complexity. No CT head was ordered, performed, or discussed.",
+          "page": 2,
+          "score": 0.05
+        }
+      ],
+      "llm_supported": true,
+      "llm_issue": "SUPPORTED",
+      "confidence": 0.9,
+      "citation": "--- Page 2 --- Orders and Procedures Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort. Result: no acute infiltrate and no pleural effusion.",
+      "page": 1,
+      "rationale": "The clinical record contains support for billed code 71046.",
+      "guardrail_rules": []
+    },
+    {
+      "line_id": "L2",
+      "code": "71045",
+      "verification_mode": "mock_fallback",
+      "fallback_used": true,
+      "retrieval_query": "71045 Chest X-ray single view CPT",
+      "retrieved_passages": [
+        {
+          "rank": 1,
+          "text": "--- Page 2 --- Orders and Procedures Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort. Result: no acute infiltrate and no pleural effusion.",
+          "page": 1,
+          "score": 0.6056
+        },
+        {
+          "rank": 2,
+          "text": "AUDITLENS AI SYNTHETIC EVALUATION CLINICAL RECORD This fictional record contains no real patient information.",
+          "page": null,
+          "score": 0.05
+        },
+        {
+          "rank": 3,
+          "text": "Medical Decision Making The visit involved low complexity. No CT head was ordered, performed, or discussed.",
+          "page": 2,
+          "score": 0.05
+        }
+      ],
+      "llm_supported": false,
+      "llm_issue": "NO_DOCUMENTATION",
+      "confidence": 0.75,
+      "citation": null,
+      "page": null,
+      "rationale": "No supporting documentation was found for billed code 71045.",
+      "guardrail_rules": [
+        "NCCI_BUNDLE"
+      ]
+    }
+  ]
+}

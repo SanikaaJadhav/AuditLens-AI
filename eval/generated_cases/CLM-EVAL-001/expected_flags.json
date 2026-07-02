@@ -1,0 +1,34 @@
+[
+  {
+    "line_id": "L1",
+    "rule": "UPCODE"
+  },
+  {
+    "line_id": "L4",
+    "rule": "NCCI_BUNDLE"
+  },
+  {
+    "line_id": "L4",
+    "rule": "UNSUPPORTED"
+  },
+  {
+    "line_id": "L5",
+    "rule": "MUE_UNITS"
+  },
+  {
+    "line_id": "L6",
+    "rule": "DUPLICATE"
+  },
+  {
+    "line_id": "L7",
+    "rule": "MEDICAL_NECESSITY"
+  },
+  {
+    "line_id": "L7",
+    "rule": "NO_DOCUMENTATION"
+  },
+  {
+    "line_id": "L8",
+    "rule": "MEDICAL_NECESSITY"
+  }
+]

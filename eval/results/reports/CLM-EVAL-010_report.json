@@ -1,0 +1,163 @@
+{
+  "claim_id": "CLM-EVAL-010",
+  "generated_at": "2026-06-30T22:03:20.460137",
+  "claim": {
+    "claim_id": "CLM-EVAL-010",
+    "patient": {
+      "patient_id": "PAT-010",
+      "name": "Synthetic Patient 010",
+      "date_of_birth": "1977-09-18"
+    },
+    "provider": {
+      "provider_id": "PRV-EVAL",
+      "name": "AuditLens Evaluation Clinic",
+      "specialty": "Family Medicine"
+    },
+    "service_date": "2025-03-04",
+    "lines": [
+      {
+        "line_id": "L1",
+        "code": "93005",
+        "code_system": "CPT",
+        "description": "Electrocardiogram tracing only",
+        "units": 1,
+        "charge": 40.0,
+        "service_date": null,
+        "modifiers": [],
+        "place_of_service": "11"
+      }
+    ]
+  },
+  "evidence": {
+    "claim_id": "CLM-1001",
+    "patient_id": "PAT-010",
+    "documented_diagnoses": [
+      {
+        "evidence_id": "DX1",
+        "type": "diagnosis",
+        "code": "R07.89",
+        "description": "Other chest pain",
+        "date": "2025-03-04",
+        "source_span": "Other chest pain (R07.89).",
+        "page": 1
+      }
+    ],
+    "documented_procedures": [],
+    "documented_visit_complexity": {
+      "supported_level": "low",
+      "supported_code": "99213",
+      "source_span": "The visit involved low complexity.",
+      "page": 2
+    }
+  },
+  "line_results": [
+    {
+      "line_id": "L1",
+      "code": "93005",
+      "status": "unsupported",
+      "flags": [
+        {
+          "line_id": "L1",
+          "status": "unsupported",
+          "rule": "NO_DOCUMENTATION",
+          "severity": "high",
+          "citation": null,
+          "page": null,
+          "confidence": 0.75,
+          "recommended_action": "request_records",
+          "message": "No supporting documentation was found for billed code 93005."
+        }
+      ],
+      "recommended_action": "escalate"
+    }
+  ],
+  "flags": [
+    {
+      "line_id": "L1",
+      "status": "unsupported",
+      "rule": "NO_DOCUMENTATION",
+      "severity": "high",
+      "citation": null,
+      "page": null,
+      "confidence": 0.75,
+      "recommended_action": "request_records",
+      "message": "No supporting documentation was found for billed code 93005."
+    }
+  ],
+  "total_charge": 40.0,
+  "dollars_at_risk": 40.0,
+  "risk_score": 51,
+  "recommended_action": "escalate",
+  "metrics": {
+    "total_lines": 1,
+    "supported_lines": 0,
+    "flagged_lines": 1,
+    "high_severity_flags": 1,
+    "medium_severity_flags": 0,
+    "low_severity_flags": 0,
+    "flag_counts_by_rule": {
+      "NO_DOCUMENTATION": 1
+    },
+    "flag_counts_by_severity": {
+      "high": 1
+    },
+    "dollars_at_risk_by_rule": {
+      "NO_DOCUMENTATION": 40.0
+    },
+    "top_risk_lines": [
+      "L1"
+    ]
+  },
+  "summary": "AuditLens found 1 review finding(s) across 1 of 1 billed line(s). Priority issues include no documentation. Estimated dollars at risk: $40.00. Risk score: 51/100. Recommended next action: escalate.",
+  "processing_metadata": {
+    "bill_filename": "CLM-EVAL-010_bill.json",
+    "record_filename": "CLM-EVAL-010_record.txt",
+    "record_input_type": "text",
+    "ocr_used": false,
+    "ocr_engine": null,
+    "extraction_method": "LLM schema extraction with deterministic fallback",
+    "verification_method": "Fallback verifier with deterministic rule guardrails",
+    "rule_guardrails_applied": [
+      "DUPLICATE",
+      "MUE_UNITS",
+      "NCCI_BUNDLE",
+      "MEDICAL_NECESSITY"
+    ]
+  },
+  "ai_traces": [
+    {
+      "line_id": "L1",
+      "code": "93005",
+      "verification_mode": "mock_fallback",
+      "fallback_used": true,
+      "retrieval_query": "93005 Electrocardiogram tracing only CPT",
+      "retrieved_passages": [
+        {
+          "rank": 1,
+          "text": "AUDITLENS AI SYNTHETIC EVALUATION CLINICAL RECORD This fictional record contains no real patient information.",
+          "page": null,
+          "score": 0.05
+        },
+        {
+          "rank": 2,
+          "text": "Medical Decision Making The visit involved low complexity. No CT head was ordered, performed, or discussed.",
+          "page": 2,
+          "score": 0.05
+        },
+        {
+          "rank": 3,
+          "text": "Patient: Synthetic Patient 010 Patient ID: PAT-010 Date of Service: 2025-03-04 Provider: AuditLens Evaluation Clinic",
+          "page": null,
+          "score": 0.0
+        }
+      ],
+      "llm_supported": false,
+      "llm_issue": "NO_DOCUMENTATION",
+      "confidence": 0.75,
+      "citation": null,
+      "page": null,
+      "rationale": "No supporting documentation was found for billed code 93005.",
+      "guardrail_rules": []
+    }
+  ]
+}

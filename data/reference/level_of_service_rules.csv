@@ -1,0 +1,4 @@
+billed_code,required_complexity,downcoded_reference,rule_description
+99213,low,99213,Level 3 established patient visit requires low documented complexity in this prototype.
+99214,moderate,99214,Level 4 established patient visit requires moderate documented complexity in this prototype.
+99215,high,99214,Level 5 established patient visit requires high documented complexity; moderate documentation should be reviewed as possible upcoding.

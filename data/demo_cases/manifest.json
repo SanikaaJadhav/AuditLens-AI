@@ -1,0 +1,42 @@
+[
+  {
+    "id": "case-1001",
+    "claim_id": "CLM-1001",
+    "patient": "Jordan Miles",
+    "scenario": "Mixed planted errors",
+    "bill_file": "case-1001/bill_CLM-1001_scanned.png",
+    "bill_format": "Scanned bill image",
+    "record_file": "case-1001/record_CLM-1001_scanned.png",
+    "record_format": "Scanned clinical record"
+  },
+  {
+    "id": "case-2002",
+    "claim_id": "CLM-2002",
+    "patient": "Priya Shah",
+    "scenario": "Clean supported claim",
+    "bill_file": "bill_CLM-2002.csv",
+    "bill_format": "CSV bill export",
+    "record_file": "record_CLM-2002.pdf",
+    "record_format": "PDF clinical record"
+  },
+  {
+    "id": "case-3003",
+    "claim_id": "CLM-3003",
+    "patient": "Luis Hernandez",
+    "scenario": "Bundled ECG plus excessive units",
+    "bill_file": "bill_CLM-3003.xlsx",
+    "bill_format": "XLSX bill export",
+    "record_file": "record_CLM-3003.txt",
+    "record_format": "Text clinical record"
+  },
+  {
+    "id": "case-4004",
+    "claim_id": "CLM-4004",
+    "patient": "Aisha Johnson",
+    "scenario": "Duplicate imaging and unsupported CT",
+    "bill_file": "bill_CLM-4004.pdf",
+    "bill_format": "PDF bill",
+    "record_file": "record_CLM-4004_scanned.png",
+    "record_format": "Scanned clinical record"
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "line_id": "L1",
+    "rule": "MEDICAL_NECESSITY"
+  },
+  {
+    "line_id": "L1",
+    "rule": "NO_DOCUMENTATION"
+  }
+]

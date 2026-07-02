@@ -1,0 +1,19 @@
+AUDITLENS AI SYNTHETIC EVALUATION CLINICAL RECORD
+This fictional record contains no real patient information.
+
+Patient: Synthetic Patient 011
+Patient ID: PAT-011
+Date of Service: 2025-03-04
+Provider: AuditLens Evaluation Clinic
+
+--- Page 1 ---
+Assessment
+1. Acute bronchitis, unspecified (J20.9).
+2. Cough, unspecified (R05.9).
+
+--- Page 2 ---
+Orders and Procedures
+Chest X-ray, two views, was ordered and completed on 2025-03-04 to evaluate cough, fever, and chest discomfort. Result: no acute infiltrate and no pleural effusion.
+
+Medical Decision Making
+The visit involved low complexity. No CT head was ordered, performed, or discussed.

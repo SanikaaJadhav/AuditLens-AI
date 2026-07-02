@@ -1,0 +1,188 @@
+{
+  "dataset": "AuditLens AI end-to-end synthetic evaluation",
+  "scoring_unit": "line_id + rule pair",
+  "cases": [
+    {
+      "case_id": "CLM-EVAL-001",
+      "title": "Original planted mixed-error claim",
+      "bill_format": "json",
+      "record_format": "txt",
+      "expected_flags": [
+        {
+          "line_id": "L1",
+          "rule": "UPCODE"
+        },
+        {
+          "line_id": "L4",
+          "rule": "NCCI_BUNDLE"
+        },
+        {
+          "line_id": "L4",
+          "rule": "UNSUPPORTED"
+        },
+        {
+          "line_id": "L5",
+          "rule": "MUE_UNITS"
+        },
+        {
+          "line_id": "L6",
+          "rule": "DUPLICATE"
+        },
+        {
+          "line_id": "L7",
+          "rule": "MEDICAL_NECESSITY"
+        },
+        {
+          "line_id": "L7",
+          "rule": "NO_DOCUMENTATION"
+        },
+        {
+          "line_id": "L8",
+          "rule": "MEDICAL_NECESSITY"
+        }
+      ]
+    },
+    {
+      "case_id": "CLM-EVAL-002",
+      "title": "Clean supported claim",
+      "bill_format": "csv",
+      "record_format": "txt",
+      "expected_flags": []
+    },
+    {
+      "case_id": "CLM-EVAL-003",
+      "title": "Duplicate chest X-ray",
+      "bill_format": "json",
+      "record_format": "txt",
+      "expected_flags": [
+        {
+          "line_id": "L2",
+          "rule": "DUPLICATE"
+        }
+      ]
+    },
+    {
+      "case_id": "CLM-EVAL-004",
+      "title": "Excessive venipuncture units",
+      "bill_format": "json",
+      "record_format": "txt",
+      "expected_flags": [
+        {
+          "line_id": "L1",
+          "rule": "MUE_UNITS"
+        }
+      ]
+    },
+    {
+      "case_id": "CLM-EVAL-005",
+      "title": "Bundled ECG tracing",
+      "bill_format": "xlsx",
+      "record_format": "txt",
+      "expected_flags": [
+        {
+          "line_id": "L2",
+          "rule": "NCCI_BUNDLE"
+        },
+        {
+          "line_id": "L2",
+          "rule": "UNSUPPORTED"
+        }
+      ]
+    },
+    {
+      "case_id": "CLM-EVAL-006",
+      "title": "CT head absent from record",
+      "bill_format": "pdf",
+      "record_format": "txt",
+      "expected_flags": [
+        {
+          "line_id": "L1",
+          "rule": "MEDICAL_NECESSITY"
+        },
+        {
+          "line_id": "L1",
+          "rule": "NO_DOCUMENTATION"
+        }
+      ]
+    },
+    {
+      "case_id": "CLM-EVAL-007",
+      "title": "Ultrasound lacks medical necessity diagnosis",
+      "bill_format": "json",
+      "record_format": "txt",
+      "expected_flags": [
+        {
+          "line_id": "L1",
+          "rule": "MEDICAL_NECESSITY"
+        }
+      ]
+    },
+    {
+      "case_id": "CLM-EVAL-008",
+      "title": "E/M upcoding",
+      "bill_format": "json",
+      "record_format": "txt",
+      "expected_flags": [
+        {
+          "line_id": "L1",
+          "rule": "UPCODE"
+        }
+      ]
+    },
+    {
+      "case_id": "CLM-EVAL-009",
+      "title": "Mixed MUE and NCCI findings",
+      "bill_format": "csv",
+      "record_format": "txt",
+      "expected_flags": [
+        {
+          "line_id": "L3",
+          "rule": "NCCI_BUNDLE"
+        },
+        {
+          "line_id": "L3",
+          "rule": "UNSUPPORTED"
+        },
+        {
+          "line_id": "L4",
+          "rule": "MUE_UNITS"
+        }
+      ]
+    },
+    {
+      "case_id": "CLM-EVAL-010",
+      "title": "Standalone unsupported ECG tracing line",
+      "bill_format": "json",
+      "record_format": "txt",
+      "expected_flags": [
+        {
+          "line_id": "L1",
+          "rule": "NO_DOCUMENTATION"
+        }
+      ]
+    },
+    {
+      "case_id": "CLM-EVAL-011",
+      "title": "Chest X-ray single view bundled into two view",
+      "bill_format": "json",
+      "record_format": "txt",
+      "expected_flags": [
+        {
+          "line_id": "L2",
+          "rule": "NCCI_BUNDLE"
+        },
+        {
+          "line_id": "L2",
+          "rule": "NO_DOCUMENTATION"
+        }
+      ]
+    },
+    {
+      "case_id": "CLM-EVAL-012",
+      "title": "Scanned clean claim ingestion",
+      "bill_format": "png",
+      "record_format": "png",
+      "expected_flags": []
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+AUDITLENS AI SYNTHETIC CLINICAL RECORD
+This is fictional data created for a prototype. It contains no real patient information.
+
+Claim ID: CLM-3003
+Patient: Luis Hernandez
+Patient ID: PAT-203
+Date of Service: 2025-03-04
+Provider: Cedar Ridge Internal Medicine
+
+--- Page 1 ---
+
+Chief Complaint
+Luis Hernandez presents for outpatient evaluation. Symptoms include palpitations and non-radiating chest discomfort.
+
+Assessment
+1. Other chest pain (R07.89).
+2. Palpitations (R00.2).
+
+--- Page 2 ---
+
+Orders and Procedures
+Electrocardiogram was performed and interpreted in clinic because the patient reported chest discomfort. Result: normal sinus rhythm, no acute ST-T changes.
+
+One venous blood sample was collected for CBC and comprehensive metabolic panel on 2025-03-04.
+
+Medical Decision Making
+The visit involved moderate complexity. No CT head was ordered, performed, or discussed.

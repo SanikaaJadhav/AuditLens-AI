@@ -1,0 +1,175 @@
+{
+  "claim_id": "CLM-EVAL-004",
+  "generated_at": "2026-06-30T22:03:20.133845",
+  "claim": {
+    "claim_id": "CLM-EVAL-004",
+    "patient": {
+      "patient_id": "PAT-004",
+      "name": "Synthetic Patient 004",
+      "date_of_birth": "1977-09-18"
+    },
+    "provider": {
+      "provider_id": "PRV-EVAL",
+      "name": "AuditLens Evaluation Clinic",
+      "specialty": "Family Medicine"
+    },
+    "service_date": "2025-03-04",
+    "lines": [
+      {
+        "line_id": "L1",
+        "code": "36415",
+        "code_system": "CPT",
+        "description": "Venipuncture",
+        "units": 3,
+        "charge": 90.0,
+        "service_date": null,
+        "modifiers": [],
+        "place_of_service": "11"
+      }
+    ]
+  },
+  "evidence": {
+    "claim_id": "CLM-1001",
+    "patient_id": "PAT-004",
+    "documented_diagnoses": [
+      {
+        "evidence_id": "DX1",
+        "type": "diagnosis",
+        "code": "J20.9",
+        "description": "Acute bronchitis, unspecified",
+        "date": "2025-03-04",
+        "source_span": "Acute bronchitis, unspecified (J20.9).",
+        "page": 1
+      }
+    ],
+    "documented_procedures": [
+      {
+        "evidence_id": "PX3",
+        "type": "procedure",
+        "code": "36415",
+        "description": "Venipuncture",
+        "date": "2025-03-04",
+        "source_span": "One venous blood sample was collected for CBC and comprehensive metabolic panel on 2025-03-04.",
+        "page": 2
+      }
+    ],
+    "documented_visit_complexity": {
+      "supported_level": "low",
+      "supported_code": "99213",
+      "source_span": "The visit involved low complexity.",
+      "page": 2
+    }
+  },
+  "line_results": [
+    {
+      "line_id": "L1",
+      "code": "36415",
+      "status": "rule_violation",
+      "flags": [
+        {
+          "line_id": "L1",
+          "status": "rule_violation",
+          "rule": "MUE_UNITS",
+          "severity": "medium",
+          "citation": null,
+          "page": null,
+          "confidence": 1.0,
+          "recommended_action": "deny_line",
+          "message": "Code 36415 was billed with 3 units, exceeding the prototype limit of 1. Venipuncture is limited to one unit per date of service in this prototype."
+        }
+      ],
+      "recommended_action": "deny_line"
+    }
+  ],
+  "flags": [
+    {
+      "line_id": "L1",
+      "status": "rule_violation",
+      "rule": "MUE_UNITS",
+      "severity": "medium",
+      "citation": null,
+      "page": null,
+      "confidence": 1.0,
+      "recommended_action": "deny_line",
+      "message": "Code 36415 was billed with 3 units, exceeding the prototype limit of 1. Venipuncture is limited to one unit per date of service in this prototype."
+    }
+  ],
+  "total_charge": 90.0,
+  "dollars_at_risk": 90.0,
+  "risk_score": 42,
+  "recommended_action": "deny_line",
+  "metrics": {
+    "total_lines": 1,
+    "supported_lines": 0,
+    "flagged_lines": 1,
+    "high_severity_flags": 0,
+    "medium_severity_flags": 1,
+    "low_severity_flags": 0,
+    "flag_counts_by_rule": {
+      "MUE_UNITS": 1
+    },
+    "flag_counts_by_severity": {
+      "medium": 1
+    },
+    "dollars_at_risk_by_rule": {
+      "MUE_UNITS": 90.0
+    },
+    "top_risk_lines": [
+      "L1"
+    ]
+  },
+  "summary": "AuditLens found 1 review finding(s) across 1 of 1 billed line(s). Priority issues include mue units. Estimated dollars at risk: $90.00. Risk score: 42/100. Recommended next action: deny line.",
+  "processing_metadata": {
+    "bill_filename": "CLM-EVAL-004_bill.json",
+    "record_filename": "CLM-EVAL-004_record.txt",
+    "record_input_type": "text",
+    "ocr_used": false,
+    "ocr_engine": null,
+    "extraction_method": "LLM schema extraction with deterministic fallback",
+    "verification_method": "Fallback verifier with deterministic rule guardrails",
+    "rule_guardrails_applied": [
+      "DUPLICATE",
+      "MUE_UNITS",
+      "NCCI_BUNDLE",
+      "MEDICAL_NECESSITY"
+    ]
+  },
+  "ai_traces": [
+    {
+      "line_id": "L1",
+      "code": "36415",
+      "verification_mode": "mock_fallback",
+      "fallback_used": true,
+      "retrieval_query": "36415 Venipuncture CPT",
+      "retrieved_passages": [
+        {
+          "rank": 1,
+          "text": "--- Page 2 --- Orders and Procedures One venous blood sample was collected for CBC and comprehensive metabolic panel on 2025-03-04.",
+          "page": 1,
+          "score": 0.5714
+        },
+        {
+          "rank": 2,
+          "text": "AUDITLENS AI SYNTHETIC EVALUATION CLINICAL RECORD This fictional record contains no real patient information.",
+          "page": null,
+          "score": 0.05
+        },
+        {
+          "rank": 3,
+          "text": "Medical Decision Making The visit involved low complexity. No CT head was ordered, performed, or discussed.",
+          "page": 2,
+          "score": 0.05
+        }
+      ],
+      "llm_supported": true,
+      "llm_issue": "SUPPORTED",
+      "confidence": 0.9,
+      "citation": "--- Page 2 --- Orders and Procedures One venous blood sample was collected for CBC and comprehensive metabolic panel on 2025-03-04.",
+      "page": 1,
+      "rationale": "The clinical record contains support for billed code 36415.",
+      "guardrail_rules": [
+        "MUE_UNITS"
+      ]
+    }
+  ]
+}

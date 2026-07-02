@@ -1,0 +1,3 @@
+primary_code,bundled_code,modifier_allowed,rule_description
+93000,93005,false,ECG tracing only is bundled into complete ECG when billed on the same date.
+71046,71045,false,Single-view chest X-ray is bundled into two-view chest X-ray when billed on the same date.

@@ -1,0 +1,18 @@
+AUDITLENS AI SYNTHETIC EVALUATION CLINICAL RECORD
+This fictional record contains no real patient information.
+
+Patient: Synthetic Patient 007
+Patient ID: PAT-007
+Date of Service: 2025-03-04
+Provider: AuditLens Evaluation Clinic
+
+--- Page 1 ---
+Assessment
+1. Nausea without vomiting (R11.0).
+
+--- Page 2 ---
+Orders and Procedures
+Complete abdominal ultrasound was performed on 2025-03-04 after patient concern about nausea. The note documents nausea only and does not document abdominal pain, abnormal liver enzymes, suspected gallbladder disease, jaundice, trauma, mass, or other coverage-supporting indication.
+
+Medical Decision Making
+The visit involved low complexity. No CT head was ordered, performed, or discussed.

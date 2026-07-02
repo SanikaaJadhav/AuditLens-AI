@@ -1,0 +1,23 @@
+code,code_system,description,category
+99213,CPT,Established patient office visit level 3,Evaluation and Management
+99214,CPT,Established patient office visit level 4,Evaluation and Management
+99215,CPT,Established patient office visit level 5,Evaluation and Management
+71045,CPT,Chest X-ray single view,Radiology
+71046,CPT,Chest X-ray 2 views,Radiology
+93000,CPT,Electrocardiogram complete,Cardiology
+93005,CPT,Electrocardiogram tracing only,Cardiology
+36415,CPT,Venipuncture,Laboratory
+70450,CPT,CT head without contrast,Radiology
+76700,CPT,Complete abdominal ultrasound,Radiology
+J20.9,ICD-10,Acute bronchitis unspecified,Diagnosis
+R05.9,ICD-10,Cough unspecified,Diagnosis
+R07.89,ICD-10,Other chest pain,Diagnosis
+R00.2,ICD-10,Palpitations,Diagnosis
+I10,ICD-10,Essential hypertension,Diagnosis
+R11.0,ICD-10,Nausea,Diagnosis
+R10.9,ICD-10,Unspecified abdominal pain,Diagnosis
+K80.20,ICD-10,Calculus of gallbladder without cholecystitis,Diagnosis
+R94.5,ICD-10,Abnormal results of liver function studies,Diagnosis
+R51.9,ICD-10,Headache unspecified,Diagnosis
+S09.90XA,ICD-10,Unspecified injury of head initial encounter,Diagnosis
+R41.82,ICD-10,Altered mental status unspecified,Diagnosis

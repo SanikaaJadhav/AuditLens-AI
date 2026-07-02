@@ -1,0 +1,4 @@
+claim_id,patient_id,patient_name,date_of_birth,provider_id,provider_name,provider_specialty,service_date,line_id,code,code_system,description,units,charge,modifiers,place_of_service
+CLM-2002,PAT-102,Priya Shah,1984-02-12,PRV-5502,Lakeview Primary Care,Family Medicine,2025-03-04,L1,71046,CPT,Chest X-ray 2 views,1,180,,11
+CLM-2002,PAT-102,Priya Shah,1984-02-12,PRV-5502,Lakeview Primary Care,Family Medicine,2025-03-04,L2,36415,CPT,Venipuncture,1,32,,11
+CLM-2002,PAT-102,Priya Shah,1984-02-12,PRV-5502,Lakeview Primary Care,Family Medicine,2025-03-04,L3,76700,CPT,Complete abdominal ultrasound,1,420,,11

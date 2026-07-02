@@ -1,0 +1,10 @@
+[
+  {
+    "line_id": "L2",
+    "rule": "NCCI_BUNDLE"
+  },
+  {
+    "line_id": "L2",
+    "rule": "NO_DOCUMENTATION"
+  }
+]

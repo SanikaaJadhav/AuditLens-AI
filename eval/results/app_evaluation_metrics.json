@@ -1,0 +1,16 @@
+{
+  "total_cases": 12,
+  "true_positives": 22,
+  "false_positives": 0,
+  "false_negatives": 0,
+  "true_negatives": 42,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1_score": 1.0,
+  "false_alarm_rate": 0.0,
+  "baseline_precision": 0.6923,
+  "baseline_recall": 0.8182,
+  "baseline_f1": 0.75,
+  "baseline_false_alarm_rate": 0.1905,
+  "false_alarm_reduction_percentage": 100.0
+}

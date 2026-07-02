@@ -1,0 +1,175 @@
+{
+  "claim_id": "CLM-EVAL-007",
+  "generated_at": "2026-06-30T22:03:20.376299",
+  "claim": {
+    "claim_id": "CLM-EVAL-007",
+    "patient": {
+      "patient_id": "PAT-007",
+      "name": "Synthetic Patient 007",
+      "date_of_birth": "1977-09-18"
+    },
+    "provider": {
+      "provider_id": "PRV-EVAL",
+      "name": "AuditLens Evaluation Clinic",
+      "specialty": "Family Medicine"
+    },
+    "service_date": "2025-03-04",
+    "lines": [
+      {
+        "line_id": "L1",
+        "code": "76700",
+        "code_system": "CPT",
+        "description": "Complete abdominal ultrasound",
+        "units": 1,
+        "charge": 420.0,
+        "service_date": null,
+        "modifiers": [],
+        "place_of_service": "11"
+      }
+    ]
+  },
+  "evidence": {
+    "claim_id": "CLM-1001",
+    "patient_id": "PAT-007",
+    "documented_diagnoses": [
+      {
+        "evidence_id": "DX1",
+        "type": "diagnosis",
+        "code": "R11.0",
+        "description": "Nausea without vomiting",
+        "date": "2025-03-04",
+        "source_span": "Nausea without vomiting (R11.0).",
+        "page": 1
+      }
+    ],
+    "documented_procedures": [
+      {
+        "evidence_id": "PX4",
+        "type": "procedure",
+        "code": "76700",
+        "description": "Complete abdominal ultrasound",
+        "date": "2025-03-04",
+        "source_span": "Complete abdominal ultrasound was performed on 2025-03-04 after patient concern about nausea. The note documents nausea only and does not document abdominal pain, abnormal liver enzymes, suspected gallbladder disease, jaundice, trauma, mass, or other coverage-supporting indication.",
+        "page": 2
+      }
+    ],
+    "documented_visit_complexity": {
+      "supported_level": "low",
+      "supported_code": "99213",
+      "source_span": "The visit involved low complexity.",
+      "page": 2
+    }
+  },
+  "line_results": [
+    {
+      "line_id": "L1",
+      "code": "76700",
+      "status": "rule_violation",
+      "flags": [
+        {
+          "line_id": "L1",
+          "status": "rule_violation",
+          "rule": "MEDICAL_NECESSITY",
+          "severity": "medium",
+          "citation": "Complete abdominal ultrasound was performed on 2025-03-04 after patient concern about nausea. The note documents nausea only and does not document abdominal pain, abnormal liver enzymes, suspected gallbladder disease, jaundice, trauma, mass, or other coverage-supporting indication.",
+          "page": 2,
+          "confidence": 1.0,
+          "recommended_action": "request_records",
+          "message": "Code 76700 lacks a documented diagnosis from the allowed set (K80.20, R10.9, R94.5). Documented diagnoses: R11.0. Complete abdominal ultrasound is supported by abdominal pain gallbladder disease or abnormal liver studies in this prototype."
+        }
+      ],
+      "recommended_action": "request_records"
+    }
+  ],
+  "flags": [
+    {
+      "line_id": "L1",
+      "status": "rule_violation",
+      "rule": "MEDICAL_NECESSITY",
+      "severity": "medium",
+      "citation": "Complete abdominal ultrasound was performed on 2025-03-04 after patient concern about nausea. The note documents nausea only and does not document abdominal pain, abnormal liver enzymes, suspected gallbladder disease, jaundice, trauma, mass, or other coverage-supporting indication.",
+      "page": 2,
+      "confidence": 1.0,
+      "recommended_action": "request_records",
+      "message": "Code 76700 lacks a documented diagnosis from the allowed set (K80.20, R10.9, R94.5). Documented diagnoses: R11.0. Complete abdominal ultrasound is supported by abdominal pain gallbladder disease or abnormal liver studies in this prototype."
+    }
+  ],
+  "total_charge": 420.0,
+  "dollars_at_risk": 420.0,
+  "risk_score": 42,
+  "recommended_action": "request_records",
+  "metrics": {
+    "total_lines": 1,
+    "supported_lines": 0,
+    "flagged_lines": 1,
+    "high_severity_flags": 0,
+    "medium_severity_flags": 1,
+    "low_severity_flags": 0,
+    "flag_counts_by_rule": {
+      "MEDICAL_NECESSITY": 1
+    },
+    "flag_counts_by_severity": {
+      "medium": 1
+    },
+    "dollars_at_risk_by_rule": {
+      "MEDICAL_NECESSITY": 420.0
+    },
+    "top_risk_lines": [
+      "L1"
+    ]
+  },
+  "summary": "AuditLens found 1 review finding(s) across 1 of 1 billed line(s). Priority issues include medical necessity. Estimated dollars at risk: $420.00. Risk score: 42/100. Recommended next action: request records.",
+  "processing_metadata": {
+    "bill_filename": "CLM-EVAL-007_bill.json",
+    "record_filename": "CLM-EVAL-007_record.txt",
+    "record_input_type": "text",
+    "ocr_used": false,
+    "ocr_engine": null,
+    "extraction_method": "LLM schema extraction with deterministic fallback",
+    "verification_method": "Fallback verifier with deterministic rule guardrails",
+    "rule_guardrails_applied": [
+      "DUPLICATE",
+      "MUE_UNITS",
+      "NCCI_BUNDLE",
+      "MEDICAL_NECESSITY"
+    ]
+  },
+  "ai_traces": [
+    {
+      "line_id": "L1",
+      "code": "76700",
+      "verification_mode": "mock_fallback",
+      "fallback_used": true,
+      "retrieval_query": "76700 Complete abdominal ultrasound CPT",
+      "retrieved_passages": [
+        {
+          "rank": 1,
+          "text": "--- Page 2 --- Orders and Procedures Complete abdominal ultrasound was performed on 2025-03-04 after patient concern about nausea. The note documents nausea only and does not document abdominal pain, abnormal liver enzymes, suspected gallbladder disease, jaundice, trauma, mass, or other coverage-supporting indication.",
+          "page": 1,
+          "score": 0.7167
+        },
+        {
+          "rank": 2,
+          "text": "AUDITLENS AI SYNTHETIC EVALUATION CLINICAL RECORD This fictional record contains no real patient information.",
+          "page": null,
+          "score": 0.05
+        },
+        {
+          "rank": 3,
+          "text": "Medical Decision Making The visit involved low complexity. No CT head was ordered, performed, or discussed.",
+          "page": 2,
+          "score": 0.05
+        }
+      ],
+      "llm_supported": true,
+      "llm_issue": "SUPPORTED",
+      "confidence": 0.9,
+      "citation": "--- Page 2 --- Orders and Procedures Complete abdominal ultrasound was performed on 2025-03-04 after patient concern about nausea. The note documents nausea only and does not document abdominal pain, abnormal liver enzymes, suspected gallbladder disease, jaundice, trauma, mass, or other coverage-supporting indication.",
+      "page": 1,
+      "rationale": "The clinical record contains support for billed code 76700.",
+      "guardrail_rules": [
+        "MEDICAL_NECESSITY"
+      ]
+    }
+  ]
+}

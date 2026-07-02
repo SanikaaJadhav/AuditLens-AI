@@ -1,0 +1,26 @@
+{
+  "claim_id": "CLM-EVAL-010",
+  "patient": {
+    "patient_id": "PAT-010",
+    "name": "Synthetic Patient 010",
+    "date_of_birth": "1977-09-18"
+  },
+  "provider": {
+    "provider_id": "PRV-EVAL",
+    "name": "AuditLens Evaluation Clinic",
+    "specialty": "Family Medicine"
+  },
+  "service_date": "2025-03-04",
+  "lines": [
+    {
+      "line_id": "L1",
+      "code": "93005",
+      "code_system": "CPT",
+      "description": "Electrocardiogram tracing only",
+      "units": 1,
+      "charge": 40,
+      "modifiers": [],
+      "place_of_service": "11"
+    }
+  ]
+}

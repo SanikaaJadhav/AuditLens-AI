@@ -1,0 +1,8 @@
+code,code_system,max_units_per_day,rule_description
+99215,CPT,1,Evaluation and management visit codes are limited to one unit per date of service in this prototype.
+71046,CPT,1,Chest X-ray two views is limited to one unit per date of service in this prototype.
+93000,CPT,1,Complete ECG is limited to one unit per date of service in this prototype.
+93005,CPT,1,ECG tracing only is limited to one unit per date of service in this prototype.
+36415,CPT,1,Venipuncture is limited to one unit per date of service in this prototype.
+70450,CPT,1,CT head without contrast is limited to one unit per date of service in this prototype.
+76700,CPT,1,Complete abdominal ultrasound is limited to one unit per date of service in this prototype.

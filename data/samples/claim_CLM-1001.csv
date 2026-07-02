@@ -1,0 +1,9 @@
+claim_id,line_id,patient_id,patient_name,provider_id,provider_name,service_date,code,code_system,description,units,charge,modifiers,place_of_service
+CLM-1001,L1,PAT-001,Jordan Miles,PRV-4421,Northstar Family Clinic,2025-03-04,99215,CPT,Established patient office visit level 5,1,310.00,,11
+CLM-1001,L2,PAT-001,Jordan Miles,PRV-4421,Northstar Family Clinic,2025-03-04,71046,CPT,Chest X-ray 2 views,1,180.00,,11
+CLM-1001,L3,PAT-001,Jordan Miles,PRV-4421,Northstar Family Clinic,2025-03-04,93000,CPT,Electrocardiogram complete,1,75.00,,11
+CLM-1001,L4,PAT-001,Jordan Miles,PRV-4421,Northstar Family Clinic,2025-03-04,93005,CPT,Electrocardiogram tracing only,1,40.00,,11
+CLM-1001,L5,PAT-001,Jordan Miles,PRV-4421,Northstar Family Clinic,2025-03-04,36415,CPT,Venipuncture,4,120.00,,11
+CLM-1001,L6,PAT-001,Jordan Miles,PRV-4421,Northstar Family Clinic,2025-03-04,71046,CPT,Chest X-ray 2 views,1,180.00,,11
+CLM-1001,L7,PAT-001,Jordan Miles,PRV-4421,Northstar Family Clinic,2025-03-04,70450,CPT,CT head without contrast,1,950.00,,11
+CLM-1001,L8,PAT-001,Jordan Miles,PRV-4421,Northstar Family Clinic,2025-03-04,76700,CPT,Complete abdominal ultrasound,1,420.00,,11
