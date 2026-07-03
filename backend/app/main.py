@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import (
     APP_NAME,
     APP_VERSION,
+    ALLOWED_ORIGINS,
     EVAL_DIR,
     MAX_UPLOAD_BYTES,
     SAMPLE_CLAIM_ID,
@@ -68,6 +69,7 @@ app.add_middleware(
         "http://127.0.0.1:5174",
         "http://localhost:5173",
         "http://localhost:5174",
+        *ALLOWED_ORIGINS,
     ],
     allow_credentials=False,
     allow_methods=["*"],
