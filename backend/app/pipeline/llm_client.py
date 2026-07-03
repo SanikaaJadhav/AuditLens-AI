@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import socket
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
@@ -12,6 +13,7 @@ from app.config import (
     OPENROUTER_APP_URL,
     OPENROUTER_BASE_URL,
     OPENROUTER_MODEL,
+    OPENROUTER_TIMEOUT_SECONDS,
 )
 
 
@@ -72,13 +74,15 @@ def call_openrouter_json(
     )
 
     try:
-        with urllib.request.urlopen(request, timeout=60) as response:
+        with urllib.request.urlopen(request, timeout=OPENROUTER_TIMEOUT_SECONDS) as response:
             body = json.loads(response.read().decode("utf-8"))
     except urllib.error.HTTPError as error:
         detail = error.read().decode("utf-8", errors="replace")
         raise LLMCallError(f"OpenRouter request failed with HTTP {error.code}: {detail}") from error
     except urllib.error.URLError as error:
         raise LLMCallError(f"OpenRouter request failed: {error.reason}") from error
+    except (TimeoutError, socket.timeout) as error:
+        raise LLMCallError(f"OpenRouter request timed out after {OPENROUTER_TIMEOUT_SECONDS} seconds.") from error
 
     try:
         content = body["choices"][0]["message"]["content"]

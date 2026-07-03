@@ -66,6 +66,7 @@ LLM_MODE = _env_first("LLM_MODE", default="live" if OPENROUTER_API_KEY and OPENR
 OPENROUTER_BASE_URL = _env_first("OPENROUTER_BASE_URL", default="https://openrouter.ai/api/v1")
 OPENROUTER_APP_URL = _env_first("OPENROUTER_APP_URL", default="http://localhost:8000")
 OPENROUTER_APP_NAME = _env_first("OPENROUTER_APP_NAME", default=APP_NAME)
+OPENROUTER_TIMEOUT_SECONDS = float(_env_first("OPENROUTER_TIMEOUT_SECONDS", default="5"))
 MAX_UPLOAD_BYTES = int(_env_first("MAX_UPLOAD_BYTES", default=str(10 * 1024 * 1024)))
 ALLOWED_ORIGINS_RAW = _env_first("ALLOWED_ORIGINS", "CORS_ORIGINS", default="")
 ALLOWED_ORIGINS = [
