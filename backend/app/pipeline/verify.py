@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import re
 from typing import Any
 
-from app.config import LLM_MODE
+from app.config import LLM_MODE, VERIFY_MAX_WORKERS
 from app.pipeline.llm_client import LLMCallError, LLMConfigurationError, LLMMessage, call_openrouter_json
 from app.pipeline.retrieval import RetrievedPassage, build_line_query, retrieve_passages_for_line
 from app.schemas import (
@@ -536,10 +537,26 @@ def verify_claim_lines_against_record_with_traces(
     record_text: str,
     evidence: ClinicalEvidenceSet,
 ) -> tuple[list[ValidationFlag], list[AIVerificationTrace]]:
+    if not claim.lines:
+        return [], []
+
+    max_workers = max(1, min(VERIFY_MAX_WORKERS, len(claim.lines)))
+    ordered_results: list[tuple[list[ValidationFlag], AIVerificationTrace] | None] = [None] * len(claim.lines)
+
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_to_index = {
+            executor.submit(verify_line_against_record_with_trace, line, record_text, evidence): index
+            for index, line in enumerate(claim.lines)
+        }
+        for future in as_completed(future_to_index):
+            ordered_results[future_to_index[future]] = future.result()
+
     flags: list[ValidationFlag] = []
     traces: list[AIVerificationTrace] = []
-    for line in claim.lines:
-        line_flags, trace = verify_line_against_record_with_trace(line, record_text, evidence)
+    for result in ordered_results:
+        if result is None:
+            continue
+        line_flags, trace = result
         flags.extend(line_flags)
         traces.append(trace)
     return flags, traces
