@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import json
 import re
 from typing import Any
 
-from app.config import LLM_MODE, VERIFY_MAX_WORKERS
+from app.config import LLM_MODE
 from app.pipeline.llm_client import LLMCallError, LLMConfigurationError, LLMMessage, call_openrouter_json
 from app.pipeline.retrieval import RetrievedPassage, build_line_query, retrieve_passages_for_line
 from app.schemas import (
@@ -33,6 +33,34 @@ VERIFY_SCHEMA: dict[str, Any] = {
         "reason": {"type": "string"},
     },
     "required": ["supported", "issue", "confidence", "citation", "page", "reason"],
+}
+
+BATCH_VERIFY_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "results": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": False,
+                "properties": {
+                    "line_id": {"type": "string"},
+                    "supported": {"type": "boolean"},
+                    "issue": {
+                        "type": "string",
+                        "enum": ["SUPPORTED", "NO_DOCUMENTATION", "UNSUPPORTED", "UPCODE"],
+                    },
+                    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+                    "citation": {"type": ["string", "null"]},
+                    "page": {"type": ["integer", "null"]},
+                    "reason": {"type": "string"},
+                },
+                "required": ["line_id", "supported", "issue", "confidence", "citation", "page", "reason"],
+            },
+        }
+    },
+    "required": ["results"],
 }
 
 RETRIEVAL_PASSAGE_THRESHOLD = 0.05
@@ -353,6 +381,82 @@ def verify_line_with_llm(
     return payload
 
 
+def verify_lines_with_llm_batch(
+    claim: Claim,
+    line_passages: dict[str, list[RetrievedPassage]],
+    evidence: ClinicalEvidenceSet,
+) -> dict[str, dict[str, Any]]:
+    visit_complexity = (
+        evidence.documented_visit_complexity.model_dump()
+        if evidence.documented_visit_complexity is not None
+        else None
+    )
+    batch_lines = []
+    for line in claim.lines:
+        batch_lines.append(
+            {
+                "line_id": line.line_id,
+                "code": line.code,
+                "description": line.description,
+                "units": line.units,
+                "service_date": str(line.service_date) if line.service_date else None,
+                "passages": [
+                    {
+                        "rank": index,
+                        "page": passage.page,
+                        "score": passage.score,
+                        "text": passage.text,
+                    }
+                    for index, passage in enumerate(line_passages.get(line.line_id, []), start=1)
+                ],
+            }
+        )
+
+    payload = call_openrouter_json(
+        messages=[
+            LLMMessage(
+                role="system",
+                content=(
+                    "You are a bounded medical-claim verification component. Decide only whether "
+                    "the provided record passages support each billed line. Use the given passages "
+                    "only; do not use outside knowledge. Return JSON only. Return exactly one result "
+                    "for each billed line_id."
+                ),
+            ),
+            LLMMessage(
+                role="user",
+                content=(
+                    "Verify these billed lines against their retrieved clinical record passages.\n"
+                    f"Extracted visit complexity: {json.dumps(visit_complexity, default=str)}\n\n"
+                    f"Billed lines and passages:\n{json.dumps(batch_lines, default=str)}\n\n"
+                    "For each line, classify issue as SUPPORTED, NO_DOCUMENTATION, UNSUPPORTED, or UPCODE. "
+                    "Use UPCODE only when the billed E/M level exceeds documented complexity. "
+                    "Use NO_DOCUMENTATION when no passage supports that the service happened. "
+                    "Use UNSUPPORTED when a passage discusses the service but does not support the billed line."
+                ),
+            ),
+        ],
+        json_schema=BATCH_VERIFY_SCHEMA,
+        schema_name="claim_line_batch_verification",
+        temperature=0.0,
+        max_tokens=3000,
+    )
+
+    results = payload.get("results")
+    if not isinstance(results, list):
+        raise LLMCallError("OpenRouter batch response did not contain a results list.")
+
+    by_line_id: dict[str, dict[str, Any]] = {}
+    expected_line_ids = {line.line_id for line in claim.lines}
+    for result in results:
+        if not isinstance(result, dict):
+            continue
+        line_id = str(result.get("line_id", ""))
+        if line_id in expected_line_ids:
+            by_line_id[line_id] = result
+    return by_line_id
+
+
 def verify_line_mock(
     line: ClaimLine,
     passages: list[RetrievedPassage],
@@ -484,6 +588,29 @@ def verify_line_against_record(
     return flags
 
 
+def _trace_from_verification(
+    line: ClaimLine,
+    passages: list[RetrievedPassage],
+    verification: dict[str, Any],
+    verification_mode: str,
+    fallback_used: bool,
+) -> AIVerificationTrace:
+    return AIVerificationTrace(
+        line_id=line.line_id,
+        code=line.code,
+        verification_mode=verification_mode,
+        fallback_used=fallback_used,
+        retrieval_query=build_line_query(line),
+        retrieved_passages=_trace_passages(passages),
+        llm_supported=bool(verification.get("supported")),
+        llm_issue=str(verification.get("issue", "UNSUPPORTED")),
+        confidence=float(verification.get("confidence", 0.0)),
+        citation=verification.get("citation"),
+        page=verification.get("page"),
+        rationale=str(verification.get("reason", "")),
+    )
+
+
 def verify_line_against_record_with_trace(
     line: ClaimLine,
     record_text: str,
@@ -506,20 +633,7 @@ def verify_line_against_record_with_trace(
         verification = verify_line_mock(line, passages, evidence)
 
     flag = _flag_from_verification(line, verification, passages)
-    trace = AIVerificationTrace(
-        line_id=line.line_id,
-        code=line.code,
-        verification_mode=verification_mode,
-        fallback_used=fallback_used,
-        retrieval_query=build_line_query(line),
-        retrieved_passages=_trace_passages(passages),
-        llm_supported=bool(verification.get("supported")),
-        llm_issue=str(verification.get("issue", "UNSUPPORTED")),
-        confidence=float(verification.get("confidence", 0.0)),
-        citation=verification.get("citation"),
-        page=verification.get("page"),
-        rationale=str(verification.get("reason", "")),
-    )
+    trace = _trace_from_verification(line, passages, verification, verification_mode, fallback_used)
     return ([flag] if flag else []), trace
 
 
@@ -540,23 +654,42 @@ def verify_claim_lines_against_record_with_traces(
     if not claim.lines:
         return [], []
 
-    max_workers = max(1, min(VERIFY_MAX_WORKERS, len(claim.lines)))
-    ordered_results: list[tuple[list[ValidationFlag], AIVerificationTrace] | None] = [None] * len(claim.lines)
+    line_passages = {
+        line.line_id: retrieve_passages_for_line(line, record_text, top_k=3)
+        for line in claim.lines
+    }
+    batch_verifications: dict[str, dict[str, Any]] = {}
+    batch_succeeded = False
 
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        future_to_index = {
-            executor.submit(verify_line_against_record_with_trace, line, record_text, evidence): index
-            for index, line in enumerate(claim.lines)
-        }
-        for future in as_completed(future_to_index):
-            ordered_results[future_to_index[future]] = future.result()
+    if LLM_MODE == "live":
+        try:
+            batch_verifications = verify_lines_with_llm_batch(claim, line_passages, evidence)
+            batch_succeeded = True
+        except (LLMConfigurationError, LLMCallError, ValueError, KeyError, TypeError):
+            batch_verifications = {}
 
     flags: list[ValidationFlag] = []
     traces: list[AIVerificationTrace] = []
-    for result in ordered_results:
-        if result is None:
-            continue
-        line_flags, trace = result
-        flags.extend(line_flags)
+    for line in claim.lines:
+        passages = line_passages[line.line_id]
+        verification = batch_verifications.get(line.line_id)
+        verification_mode = "openrouter_batch"
+        fallback_used = False
+
+        if verification is None:
+            verification = verify_line_mock(line, passages, evidence)
+            verification_mode = "mock_fallback"
+            fallback_used = True
+
+        flag = _flag_from_verification(line, verification, passages)
+        if flag:
+            flags.append(flag)
+        trace = _trace_from_verification(
+            line=line,
+            passages=passages,
+            verification=verification,
+            verification_mode=verification_mode,
+            fallback_used=fallback_used or not batch_succeeded,
+        )
         traces.append(trace)
     return flags, traces

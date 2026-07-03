@@ -19,7 +19,7 @@ Severity = Literal["none", "low", "medium", "high"]
 RecommendedAction = Literal["pay", "request_records", "deny_line", "escalate"]
 EvidenceType = Literal["diagnosis", "procedure", "visit_complexity", "note_span"]
 DocumentInputType = Literal["text", "pdf", "image", "unknown"]
-VerificationMode = Literal["openrouter_llm", "mock_fallback"]
+VerificationMode = Literal["openrouter_llm", "openrouter_batch", "mock_fallback"]
 DocumentationGapType = Literal["Complete gap", "Partial gap", "Complexity gap"]
 
 
