@@ -5,7 +5,7 @@ import re
 from datetime import date
 from pathlib import Path
 
-from app.config import LLM_MODE, SAMPLE_CLAIM_JSON, SAMPLE_EVIDENCE_JSON
+from app.config import ENABLE_LLM_EXTRACTION, LLM_MODE, SAMPLE_CLAIM_JSON, SAMPLE_EVIDENCE_JSON
 from app.pipeline.llm_client import LLMCallError, LLMConfigurationError, LLMMessage, call_openrouter_json
 from app.pipeline.ocr import extract_text_from_document
 from app.schemas import Claim, ClinicalEvidenceSet, DocumentedEvidence, VisitComplexityEvidence
@@ -33,7 +33,7 @@ def extract_clinical_evidence(path: Path) -> ClinicalEvidenceSet:
         return load_clinical_evidence_from_json(path)
 
     note_text = extract_text_from_document(path)
-    if LLM_MODE == "live":
+    if LLM_MODE == "live" and ENABLE_LLM_EXTRACTION:
         try:
             return extract_clinical_evidence_with_llm(note_text)
         except (LLMConfigurationError, LLMCallError, ValueError):

@@ -439,7 +439,7 @@ def verify_lines_with_llm_batch(
         json_schema=BATCH_VERIFY_SCHEMA,
         schema_name="claim_line_batch_verification",
         temperature=0.0,
-        max_tokens=3000,
+        max_tokens=1800,
     )
 
     results = payload.get("results")
@@ -650,18 +650,21 @@ def verify_claim_lines_against_record_with_traces(
     claim: Claim,
     record_text: str,
     evidence: ClinicalEvidenceSet,
+    use_llm: bool | None = None,
 ) -> tuple[list[ValidationFlag], list[AIVerificationTrace]]:
     if not claim.lines:
         return [], []
 
     line_passages = {
-        line.line_id: retrieve_passages_for_line(line, record_text, top_k=3)
+        line.line_id: retrieve_passages_for_line(line, record_text, top_k=2)
         for line in claim.lines
     }
     batch_verifications: dict[str, dict[str, Any]] = {}
     batch_succeeded = False
 
-    if LLM_MODE == "live":
+    should_use_llm = LLM_MODE == "live" if use_llm is None else use_llm
+
+    if should_use_llm:
         try:
             batch_verifications = verify_lines_with_llm_batch(claim, line_passages, evidence)
             batch_succeeded = True

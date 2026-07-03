@@ -2,7 +2,7 @@ from collections import Counter, defaultdict
 from datetime import datetime
 from typing import Any
 
-from app.config import LLM_MODE
+from app.config import ENABLE_LLM_NARRATIVE, LLM_MODE
 from app.pipeline.llm_client import LLMCallError, LLMConfigurationError, LLMMessage, call_openrouter_json
 from app.pipeline.reference_data import load_medical_necessity_rules
 from app.schemas import (
@@ -289,7 +289,7 @@ def build_claim_narrative(
     action: RecommendedAction,
 ) -> str:
     fallback = _fallback_claim_narrative(claim, flags, dollars_at_risk, risk_score, action)
-    if LLM_MODE != "live":
+    if LLM_MODE != "live" or not ENABLE_LLM_NARRATIVE:
         return fallback
 
     findings = _finding_payload(claim, flags)

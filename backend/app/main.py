@@ -11,9 +11,12 @@ from app.config import (
     APP_NAME,
     APP_VERSION,
     ALLOWED_ORIGINS,
+    ENABLE_LLM_EXTRACTION,
+    ENABLE_SAMPLE_LLM_VERIFICATION,
     EVAL_DIR,
     MAX_UPLOAD_BYTES,
     SAMPLE_CLAIM_ID,
+    SAMPLE_REPORT_CACHE_ENABLED,
     SAMPLE_NOTE_PDF,
     SAMPLE_NOTE_SCANNED,
     SAMPLE_NOTE_TEXT,
@@ -51,6 +54,7 @@ ALLOWED_RECORD_SUFFIXES = {".txt", ".pdf", ".png", ".jpg", ".jpeg", ".tif", ".ti
 RECORD_TEXT_CACHE: dict[str, str] = {}
 EVIDENCE_CACHE: dict[str, ClinicalEvidenceSet] = {}
 REPORT_CACHE: dict[str, ClaimReport] = {}
+SAMPLE_REPORT_CACHE: dict[str, ClaimReport] = {}
 
 RULE_GUARDRAILS = ["DUPLICATE", "MUE_UNITS", "NCCI_BUNDLE", "MEDICAL_NECESSITY"]
 EVALUATION_RESULTS_PATH = EVAL_DIR / "results" / "app_evaluation_metrics.json"
@@ -135,10 +139,18 @@ def _analyze_sample_claim_from_source(record_source: str = "text") -> ClaimRepor
         supported_sources = ", ".join(sorted(SAMPLE_RECORD_SOURCES))
         raise HTTPException(status_code=400, detail=f"Unsupported sample source. Use one of: {supported_sources}.")
 
+    if SAMPLE_REPORT_CACHE_ENABLED and record_source in SAMPLE_REPORT_CACHE:
+        return SAMPLE_REPORT_CACHE[record_source]
+
     claim = load_claim_from_json()
-    record_text = extract_text_from_document(record_path)
-    evidence = extract_clinical_evidence(record_path)
-    verification_flags, ai_traces = verify_claim_lines_against_record_with_traces(claim, record_text, evidence)
+    record_text = SAMPLE_NOTE_TEXT.read_text(encoding="utf-8")
+    evidence = load_clinical_evidence_from_json()
+    verification_flags, ai_traces = verify_claim_lines_against_record_with_traces(
+        claim,
+        record_text,
+        evidence,
+        use_llm=ENABLE_SAMPLE_LLM_VERIFICATION,
+    )
     flags = (
         verification_flags
         + run_rulebook_checks(claim)
@@ -157,6 +169,8 @@ def _analyze_sample_claim_from_source(record_source: str = "text") -> ClaimRepor
         ai_traces=ai_traces,
     )
     _cache_and_persist_claim_artifacts(report, record_text, evidence)
+    if SAMPLE_REPORT_CACHE_ENABLED:
+        SAMPLE_REPORT_CACHE[record_source] = report
     return report
 
 def _build_report_from_claim_and_record(
@@ -228,13 +242,18 @@ def _processing_metadata_for_files(
     verification_method = "OpenRouter LLM with deterministic rule guardrails"
     if any(trace.fallback_used for trace in ai_traces):
         verification_method = "Fallback verifier with deterministic rule guardrails"
+    extraction_method = (
+        "LLM schema extraction with deterministic fallback"
+        if ENABLE_LLM_EXTRACTION
+        else "Deterministic clinical fact extraction"
+    )
     return ProcessingMetadata(
         bill_filename=bill_filename,
         record_filename=record_filename or record_path.name,
         record_input_type=input_type,
         ocr_used=ocr_used,
         ocr_engine="Tesseract" if ocr_used and shutil.which("tesseract") else ("sample text fallback" if ocr_used else None),
-        extraction_method="LLM schema extraction with deterministic fallback",
+        extraction_method=extraction_method,
         verification_method=verification_method,
         rule_guardrails_applied=RULE_GUARDRAILS,
     )
