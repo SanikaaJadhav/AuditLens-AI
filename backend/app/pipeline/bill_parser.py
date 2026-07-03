@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 from io import BytesIO, StringIO
 import json
 import re
@@ -9,6 +10,7 @@ from typing import Any
 import pandas as pd
 from pydantic import ValidationError
 
+from app.config import BILL_IMAGE_OCR_MAX_DIMENSION, BILL_OCR_TIMEOUT_SECONDS
 from app.schemas import Claim
 
 
@@ -48,20 +50,39 @@ REQUIRED_TABULAR_FIELDS = {
     "charge",
 }
 
+BILL_PARSE_CACHE_MAX_ITEMS = 24
+BILL_PARSE_CACHE: dict[str, Claim] = {}
+
 
 def parse_bill_file(content: bytes, filename: str | None) -> Claim:
     suffix = _suffix(filename)
+    cache_key = f"{suffix}:{hashlib.sha256(content).hexdigest()}"
+    cached_claim = BILL_PARSE_CACHE.get(cache_key)
+    if cached_claim is not None:
+        return cached_claim.model_copy(deep=True)
+
     if suffix == ".json":
-        return parse_bill_json(content)
-    if suffix == ".csv":
-        return parse_bill_csv(content)
-    if suffix == ".xlsx":
-        return parse_bill_xlsx(content)
-    if suffix == ".pdf":
-        return parse_bill_pdf(content)
-    if suffix in {".png", ".jpg", ".jpeg", ".tif", ".tiff"}:
-        return parse_bill_image(content)
-    raise BillParseError("Upload the bill as JSON, CSV, XLSX, PDF, or image.")
+        claim = parse_bill_json(content)
+    elif suffix == ".csv":
+        claim = parse_bill_csv(content)
+    elif suffix == ".xlsx":
+        claim = parse_bill_xlsx(content)
+    elif suffix == ".pdf":
+        claim = parse_bill_pdf(content)
+    elif suffix in {".png", ".jpg", ".jpeg", ".tif", ".tiff"}:
+        claim = parse_bill_image(content)
+    else:
+        raise BillParseError("Upload the bill as JSON, CSV, XLSX, PDF, or image.")
+
+    _remember_bill_parse(cache_key, claim)
+    return claim.model_copy(deep=True)
+
+
+def _remember_bill_parse(cache_key: str, claim: Claim) -> None:
+    if len(BILL_PARSE_CACHE) >= BILL_PARSE_CACHE_MAX_ITEMS:
+        oldest_key = next(iter(BILL_PARSE_CACHE))
+        BILL_PARSE_CACHE.pop(oldest_key, None)
+    BILL_PARSE_CACHE[cache_key] = claim.model_copy(deep=True)
 
 
 def parse_bill_json(content: bytes) -> Claim:
@@ -322,18 +343,38 @@ def parse_bill_pdf(content: bytes) -> Claim:
 
 def parse_bill_image(content: bytes) -> Claim:
     try:
-        from PIL import Image
+        from PIL import Image, ImageOps
         import pytesseract
     except ImportError as error:
         raise BillParseError("Image bill OCR requires Pillow and pytesseract. Install backend requirements and retry.") from error
 
     try:
         image = Image.open(BytesIO(content))
-        text = pytesseract.image_to_string(image)
+        image = _prepare_bill_image_for_ocr(image, ImageOps)
+        text = pytesseract.image_to_string(
+            image,
+            config="--oem 1 --psm 6",
+            timeout=BILL_OCR_TIMEOUT_SECONDS,
+        )
+    except RuntimeError as error:
+        raise BillParseError(
+            f"Bill image OCR timed out after {BILL_OCR_TIMEOUT_SECONDS} seconds. "
+            "Try a sharper cropped bill image, PDF text export, CSV, or XLSX."
+        ) from error
     except Exception as error:
         raise BillParseError(f"OCR failed for uploaded bill image: {error}") from error
 
     return parse_bill_text_export(text, source="image OCR")
+
+
+def _prepare_bill_image_for_ocr(image: Any, image_ops: Any) -> Any:
+    image = image.convert("L")
+    width, height = image.size
+    max_dimension = max(width, height)
+    if max_dimension > BILL_IMAGE_OCR_MAX_DIMENSION:
+        scale = BILL_IMAGE_OCR_MAX_DIMENSION / max_dimension
+        image = image.resize((max(1, int(width * scale)), max(1, int(height * scale))))
+    return image_ops.autocontrast(image)
 
 
 def parse_bill_text_export(text: str, source: str) -> Claim:
